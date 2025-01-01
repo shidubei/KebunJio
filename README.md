@@ -1,7 +1,7 @@
 ## Project Management
 [KebunJio Project Board](https://github.com/users/MAzrilHello/projects/2/views/1)
 # 🌱 KebunJio
-**An app to collaborate with gardening enthusiasts.**
+**Empowering urban residents to actively contribute to Singapore’s ‘30 by 30’ sustainability goal by building a connected community of gardeners**
 
 Welcome to **KebunJio**! This project aims to create a collaborative platform for gardening enthusiasts to share ideas, resources, and build thriving green communities.
 
