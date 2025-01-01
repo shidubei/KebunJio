@@ -18,9 +18,37 @@ KebunJio is being developed as part of a 4-sprint Agile plan:
 
 ## 📂 Project Structure
 ### Key Features
-- **User Collaboration**: Share gardening tips and connect with others.
-- **Resource Sharing**: Upload and download gardening resources.
-- **Event Management**: Plan and join gardening meetups.
+🌱 User Collaboration
+
+Description: Connect with gardening enthusiasts to share tips, tricks, and success stories for cultivating beautiful gardens.
+📚 Resource Sharing
+
+Description: Upload and download gardening guides, tools, and tutorials to help the community thrive.
+📅 Event Management
+
+Description: Plan, join, and manage gardening events like workshops, plant swaps, and community garden meetups.
+🔎 Plant Library
+
+Description: Access a curated library of plant care guides, complete with information on sunlight, watering needs, and soil requirements.
+📊 Growth Tracking
+
+Description: Keep track of your plant's growth and health with personalized tracking tools.
+🛒 Marketplace
+
+Description: Buy, sell, or trade gardening supplies, plants, and seeds with other users in your local area.
+🌐 Gardening API Integration
+
+Description: Fetch data from third-party APIs for real-time gardening tips, weather updates, and seasonal recommendations.
+👤 User Profiles
+
+Description: Create a profile to showcase your gardening achievements, share your favorite plants, and connect with like-minded enthusiasts.
+🔔 Notifications
+
+Description: Get updates on upcoming events, new resources, and activity on your posts or collaborations.
+💬 Real-Time Chat
+
+Description: Collaborate with fellow gardeners using instant messaging to share ideas and troubleshoot issues.
+
 
 ### Tech Stack
 - **Frontend**: ReactJS / Android (Kotlin) / 
