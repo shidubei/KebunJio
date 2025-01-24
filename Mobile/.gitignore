@@ -1,0 +1,46 @@
+# IntelliJ IDEA/Android Studio
+*.iml
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+
+# Local configuration file (specific to your environment)
+local.properties
+
+# Build output
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Crashlytics and Fabric files
+com_crashlytics_export_strings.xml
+crashlytics.properties
+fabric.properties
+
+# Log files
+*.log
+
+# Temporary files
+*.temp
+*.tmp
+*.swp
+*.swo
+
+# Generated APKs
+*.apk
+*.ap_
+
+# Miscellaneous
+*.db
+*.class
+*.war
+*.ear
+
+# macOS-specific files
+.DS_Store
