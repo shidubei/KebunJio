@@ -1,0 +1,42 @@
+/.metadata/
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.log
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# Spring Boot specific
+spring-boot-devtools.jar
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Misc
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Gradle Wrapper
+gradle-wrapper.jar
+gradle-wrapper.properties
