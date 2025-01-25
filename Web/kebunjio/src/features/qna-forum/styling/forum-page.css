@@ -1,0 +1,19 @@
+.page-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;          
+  }
+
+.menu-sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 30vh;
+    background-color:darkseagreen;
+}
+
+.main-content{
+    width: 85vw;
+    background-color: aqua;
+}

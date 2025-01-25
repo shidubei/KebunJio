@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './Appbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function BasicExample() {
+function Appbar() {
   return (
     <Navbar expand="lg" className="custom-navbar">
       <Container>
@@ -22,4 +22,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Appbar;
