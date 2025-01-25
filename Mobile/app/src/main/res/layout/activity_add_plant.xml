@@ -28,6 +28,7 @@
             android:id="@+id/name_edit_text"
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
+            android:hint="ex. plant in pot 1"
             />
     </LinearLayout>
 
@@ -68,6 +69,26 @@
         android:layout_width="match_parent"
         android:text="Image: "
         />
+
+    <Button
+        android:id="@+id/select_image_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Select an Image" />
+
+    <ImageView
+        android:id="@+id/show_chosen_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/add_plant_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add Plant" />
 
     </LinearLayout>
 

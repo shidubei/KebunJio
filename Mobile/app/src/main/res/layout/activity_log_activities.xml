@@ -6,5 +6,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.logactivities.LogActivitiesActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Log Activities"
+            />
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Plant: "
+                />
+            <Spinner
+                android:id="@+id/plant_spinner"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Activity Type: "
+                />
+            <EditText
+                android:id="@+id/activity_type_text"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:hint="ex. watering, adding fertiliser"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Activity Description: "
+                />
+            <EditText
+                android:id="@+id/activity_desc_text"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:hint="ex. watered 500ml"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Date and Time: "
+                />
+            <TextView
+                android:id="@+id/time_stamp_text"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text=""
+                />
+            <Button
+                android:id="@+id/select_time_btn"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="Select Time" />
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
