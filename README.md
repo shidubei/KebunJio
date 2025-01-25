@@ -1,4 +1,4 @@
-# <img src="https://github.com/MAzrilHello/KebunJio/blob/main/%E6%9C%AA%E5%91%BD%E5%90%8D%E4%BD%9C%E5%93%81%202.png" alt="KebunJio Icon" width="150"/> KebunJio
+# <img src="https://github.com/MAzrilHello/KebunJio/blob/main/%E6%9C%AA%E5%91%BD%E5%90%8D%E4%BD%9C%E5%93%81%202.png" alt="KebunJio Icon" width="50"/> KebunJio
 **Empowering urban residents to actively contribute to Singapore’s ‘30 by 30’ sustainability goal by building a connected community of gardeners**
 
 Welcome to **KebunJio**! This project aims to create a collaborative platform for gardening enthusiasts to share ideas, resources, and build thriving green communities.
