@@ -1,6 +1,7 @@
 import React from 'react';
 import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
+import PostSneakPeak from '../components/post-sneak-peek';
 import '../styling/forum-page.css'
 
 function ForumTopPage() {
@@ -12,7 +13,7 @@ function ForumTopPage() {
             <MenuSidebar/>
         </div>
         <div className="main-content">
-
+          <PostSneakPeak/>
         </div>
       </div>
     </div>

@@ -2,21 +2,20 @@ import React from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import PostHeader from "./post-header";
-import PostInsight from "./post-insight";
+import ReplyInsight from "./reply-insight";
 
-function PostSneakPeak(){
+function Reply(){
     return(
         <div>
             <Container>
                 <Row><PostHeader/></Row>
                 <Row>
-                    <b>Title</b>
                     <p>Content</p>
                 </Row>
-                <Row><PostInsight/></Row>
+                <Row><ReplyInsight/></Row>
             </Container>
         </div>
     )
 }
 
-export default PostSneakPeak;
+export default Reply;
