@@ -79,15 +79,26 @@
                 android:id="@+id/time_stamp_text"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:text=""
+                android:text="dd/mm/yyyy hh:mm"
                 />
             <Button
-                android:id="@+id/select_time_btn"
+                android:id="@+id/change_date_btn"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:text="Select Time" />
+                android:text="Change Date" />
+            <Button
+                android:id="@+id/change_time_btn"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="Change Time" />
         </LinearLayout>
-
+        <Button
+            android:id="@+id/log_activities_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="Log Activities" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
