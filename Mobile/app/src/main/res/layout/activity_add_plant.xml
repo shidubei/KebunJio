@@ -6,5 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.addplant.AddPlantActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Add New Plant"
+    />
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="Name: "
+            />
+        <EditText
+            android:id="@+id/name_edit_text"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="Species: "
+            />
+        <Spinner
+            android:id="@+id/species_spinner"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="Species (Others): "
+            />
+        <EditText
+            android:id="@+id/species_edit_text"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:hint="fill this is plant species not in dropdown"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Image: "
+        />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
