@@ -1,12 +1,11 @@
 import React from 'react';
 
-function App() {
+function ForumPage() {
   return (
     <div>
       <h1>Q&A Forum</h1>
-      <PostCard />
     </div>
   );
 }
 
-export default App;
+export default ForumPage;
