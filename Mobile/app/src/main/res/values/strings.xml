@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KebunJio</string>
+    <string name="title_activity_choose_plant_to_view">ChoosePlantToViewActivity</string>
 </resources>

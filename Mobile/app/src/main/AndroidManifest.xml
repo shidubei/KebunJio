@@ -15,10 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KebunJio"
         tools:targetApi="31">
+        <activity
+            android:name=".features.viewplantdetails.ChoosePlantToViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_choose_plant_to_view"
+            android:theme="@style/Theme.KebunJio" />
+
         <service
             android:name=".service.mlModel.MlModelService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".features.logactivities.LogActivitiesActivity"

@@ -82,7 +82,7 @@ class DownloadImageService : Service() {
         outp.close()
     }
 
-    private fun getFileExtension(str: String) : String {
+    public fun getFileExtension(str: String) : String {
         return str.substring(str.lastIndexOf("."))
     }
 

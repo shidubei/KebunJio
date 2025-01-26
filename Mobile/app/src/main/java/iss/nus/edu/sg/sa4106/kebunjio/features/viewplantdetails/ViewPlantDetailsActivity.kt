@@ -78,10 +78,16 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // get the id to show
+        val showId = intent.getIntExtra("ediblePlantId",-1)
+        if (showId != -1) {
+            // Download the data corresponding to the ID and then show species
+        }
     }
 
-    private fun showNewSpecies(newSpacies: EdiblePlantSpecies) {
-        currentSpecies = newSpacies
+    private fun showNewSpecies(newSpecies: EdiblePlantSpecies) {
+        currentSpecies = newSpecies
         plantNameText.text = currentSpecies!!.name
         sciNameText.text = currentSpecies!!.scientificName
         showPlantImg.setImageBitmap(null)
