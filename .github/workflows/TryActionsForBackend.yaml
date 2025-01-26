@@ -45,13 +45,13 @@ jobs:
         with:
           java-version: '17' # set JDK version
 
-      # Cache Mvn project Dependency
-      - name: Cache Mvn dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key:
-          restore-key:
+      # # Cache Mvn project Dependency
+      # - name: Cache Mvn dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.m2/repository
+      #     key:
+      #     restore-key:
 
       # Build Project
       - name: Build with Mvn
