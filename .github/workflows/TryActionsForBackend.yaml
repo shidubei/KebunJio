@@ -58,6 +58,7 @@ jobs:
       - name: Build with Mvn
         # if: ${{ github.event.inputs.build_docker == 'true' }}
         run: mvn clean install -DskipTests=true
+        working-directory: Backend/Kebunjio
 
       # Run test (Junit)
       - name: Run tests with Mvn
