@@ -14,7 +14,7 @@ public class PostServiceTest {
 	
 	@Test
 	void testAdd() {
-		int result = postService.add(1, 3);
-		Assertions.assertEquals(4,result);
+		int result = postService.add(1, 4);
+		Assertions.assertEquals(5,result);
 	}
 }
