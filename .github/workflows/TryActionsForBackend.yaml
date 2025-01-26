@@ -1,16 +1,17 @@
 name: Try CI/CD pipeline for Backend
 
 # Set the trigger conditions
-on: 
-  branches:
-    - feature/forum-post_request # when Main branch have update try run the script
-  paths:
-    - 'Backend/**' # When Backend have update
-  paths_ignore:
-    # wait for the really File structure
-  pull_request:
+on:
+  push: 
     branches:
-      - main # when Main branch has PR trigger
+      - feature/forum-post_request # when Main branch have update try run the script
+    paths:
+      - 'Backend/**' # When Backend have update
+    paths-ignore:
+    # wait for the really File structure
+  # pull_request:
+  #   branches:
+  #     - main # when Main branch has PR trigger
 
   # Set some manual work,like wait user check for deploy
   workflow_dispatch:
@@ -62,7 +63,7 @@ jobs:
         run: mvn test
 
       # Upload Test Resport to Github
-      - naem: Upload test report
+      - name: Upload test report
         uses: actions/upload-artifact@v3
         with:
           name: junit-reports
