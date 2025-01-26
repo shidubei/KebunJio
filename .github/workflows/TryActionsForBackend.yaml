@@ -4,7 +4,7 @@ name: Try CI/CD pipeline for Backend
 on:
   push: 
     branches:
-      - feature/forum-post_request # when Main branch have update try run the script
+      - feature/forum-post_question # when Main branch have update try run the script
     paths:
       - 'Backend/**' # When Backend have update
     paths-ignore:
