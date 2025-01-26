@@ -11,10 +11,8 @@ import iss.nus.edu.sg.sa4106.KebunJio.DAO.PostDAO;
 import iss.nus.edu.sg.sa4106.KebunJio.Models.Post;
 import iss.nus.edu.sg.sa4106.KebunJio.Repository.PostRepository;
 
-/* Todo:
- * 1. Function1: CreatePost
- * 2. Function2: GetAllPosts
- * 3. Function3: GetPostByPostId
+/* ToDiscuss:
+ * 1. Do we need a interface for all service?
 */
 @Service
 public class PostService {
@@ -58,4 +56,9 @@ public class PostService {
 		}
 	}
 	
+	
+	//Function for Junit and GithubActions
+	public int add(int a,int b) {
+		return a+b;
+	}
 }
