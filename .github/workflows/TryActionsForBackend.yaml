@@ -58,7 +58,7 @@ jobs:
       - name: Build with Mvn
         # if: ${{ github.event.inputs.build_docker == 'true' }}
         run: mvn clean install -DskipTests=true
-        working-directory: Backend/Kebunjio
+        working-directory: Backend/KebunJio
 
       # Run test (Junit)
       - name: Run tests with Mvn
@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: junit-reports
-          path: /Backend/Kebunjio/target/test-reposts/*.xml
+          path: /Backend/KebunJio/target/test-reposts/*.xml
 
       # Generate JAR file
       # - name: Build JAR
