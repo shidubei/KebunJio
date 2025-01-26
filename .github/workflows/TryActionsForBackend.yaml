@@ -63,6 +63,7 @@ jobs:
       # Run test (Junit)
       - name: Run tests with Mvn
         run: mvn test
+        working-directory: Backend/KebunJio
 
       # Upload Test Resport to Github
       - name: Upload test report
