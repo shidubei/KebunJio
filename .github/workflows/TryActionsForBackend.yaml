@@ -43,7 +43,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'        
-          distribution: ' AdoptOpenJDK'  
+          distribution: 'temurin'  
 
 
       # # Cache Mvn project Dependency
