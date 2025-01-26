@@ -6,5 +6,141 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.viewplantdetails.ViewPlantDetailsActivity">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Plant Details"
+            />
+        <TextView
+            android:id = "@+id/plant_name_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Name"
+            />
+        <TextView
+            android:id = "@+id/sci_name_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Scientific Name"
+            />
+        <ImageView
+            android:id="@+id/show_plant_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Edible Plant Group: "
+                />
+            <TextView
+                android:id = "@+id/edible_group_text"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="___"
+                />
+        </LinearLayout>
+        <TextView
+            android:id = "@+id/description_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Desc Line 1\nDesc Line 2\nDesc Line 3"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Watering Tips:"
+            />
+        <TextView
+            android:id = "@+id/water_tips_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Water tips line 1\nWater tips line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Sunlight:"
+            />
+        <TextView
+            android:id = "@+id/sunlight_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Sunlight line 1\nSunlight line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Soil Type:"
+            />
+        <TextView
+            android:id = "@+id/soil_type_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Soil Type line 1\nSoil Type line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Harvest Time:"
+            />
+        <TextView
+            android:id = "@+id/harvest_time_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Harvest Time line 1\nHarvest Time line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Common Pests:"
+            />
+        <TextView
+            android:id = "@+id/common_pests_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Common Pests line 1\nCommon Pests line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Growing Space:"
+            />
+        <TextView
+            android:id = "@+id/growing_space_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Growing Space line 1\nGrowing Space line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Fertilizer Tips:"
+            />
+        <TextView
+            android:id = "@+id/fertilizer_tips_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Fertilizer Tips line 1\nFertilizer Tips line 2"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Special Needs:"
+            />
+        <TextView
+            android:id = "@+id/special_needs_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Special Needs line 1\nSpecial Needs line 2"
+            />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

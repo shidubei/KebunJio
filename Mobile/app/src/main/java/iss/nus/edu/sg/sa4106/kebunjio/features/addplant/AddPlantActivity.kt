@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat
 import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityAddPlantBinding
 import iss.nus.edu.sg.sa4106.kebunjio.service.mlModel.MlModelService
+import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 
 class AddPlantActivity : AppCompatActivity() {
 
@@ -25,6 +27,7 @@ class AddPlantActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var nameEditText: EditText
     private lateinit var speciesSpinner: Spinner
+    private lateinit var addPlantBtn: Button
 
     // services
     //variables for service, set bound to false
@@ -52,14 +55,14 @@ class AddPlantActivity : AppCompatActivity() {
             //get intent action
             val action = intent.action
 
-            //if intent action is update
-            if(action.equals("Predict Species")){
 
+            if(action.equals("Predict Species")){
+                // need to assign the species index to the dropdown
                 runOnUiThread {
                 }
 
             } else if (action.equals("Species List")) {
-
+                // assign the species list as dropdown values
             }
         }
     }
@@ -67,17 +70,38 @@ class AddPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // add binding
         _binding = ActivityAddPlantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         nameEditText = binding.nameEditText
         speciesSpinner = binding.speciesSpinner
+        addPlantBtn = binding.addPlantBtn
+
+        addPlantBtn.setOnClickListener {
+            addNewPlant()
+        }
+
+        // bind service
+        //bound to service
+        val intent = Intent(this@AddPlantActivity, MlModelService::class.java)
+        bindService(intent, conn, Context.BIND_AUTO_CREATE)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun addNewPlant() {
+        val plantId = -1 // Must assign a proper id later
+        val ediblePlantSpeciesId = -1 // must assign a proper id later
+        val userId = -1 // must assign a proper id later
+        val name = nameEditText.text.toString()
+        val newPlant = Plant(plantId, ediblePlantSpeciesId, userId, name)
+        // TODO: add the new plant
     }
 
     //function for subscribe to broadcast

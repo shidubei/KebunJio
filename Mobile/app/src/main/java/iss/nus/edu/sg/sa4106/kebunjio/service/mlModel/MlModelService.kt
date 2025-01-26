@@ -18,14 +18,14 @@ class MlModelService : Service() {
         }
     }
 
-    val binder: IBinder = LocalBinder()
+    private val binder: IBinder = LocalBinder()
 
     override fun onBind(intent: Intent): IBinder {
         return binder
     }
 
 
-    fun makePredictPlantSpeciesConnection(requestMethod: String="GET"): HttpURLConnection {
+    private fun makePredictPlantSpeciesConnection(requestMethod: String="GET"): HttpURLConnection {
         val use_as_ip = "10.0.2.2"
         val flaskUrl = "http://$use_as_ip:5000/predictSpecies"
         Log.d("makePredictPlantSpeciesConnection","flaskUrl: $flaskUrl")

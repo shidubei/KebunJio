@@ -5,12 +5,14 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import iss.nus.edu.sg.sa4106.kebunjio.R
+import iss.nus.edu.sg.sa4106.kebunjio.data.ActivityLog
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityLogActivitiesBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -24,6 +26,9 @@ class LogActivitiesActivity : AppCompatActivity() {
     lateinit var timeStampText: TextView
     lateinit var changeDateBtn: Button
     lateinit var changeTimeBtn: Button
+    lateinit var logActivitiesBtn: Button
+    lateinit var activityTypeText: EditText
+    lateinit var activityDescText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +39,9 @@ class LogActivitiesActivity : AppCompatActivity() {
         timeStampText = binding.timeStampText
         changeDateBtn = binding.changeDateBtn
         changeTimeBtn = binding.changeTimeBtn
+        activityTypeText = binding.activityTypeText
+        activityDescText = binding.activityDescText
+        logActivitiesBtn = binding.logActivitiesBtn
 
         changeDateBtn.setOnClickListener {
             changeDateTime(true)
@@ -43,11 +51,28 @@ class LogActivitiesActivity : AppCompatActivity() {
             changeDateTime(false)
         }
 
+        logActivitiesBtn.setOnClickListener {
+            logNewActivity()
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+
+    private fun logNewActivity() {
+        val logId = -1 // Must assign a proper id later
+        val userId = -1 // must assign a proper id later
+        val plantId: Int? = null // must assign a proper id later
+        val activityType = activityTypeText.text.toString()
+        val activityDesc = activityDescText.text.toString()
+        val timeStamp = timeStampText.text.toString()
+
+        var ActivityLog = ActivityLog(logId,userId,plantId,activityType,activityDesc,timeStamp)
+        // TODO: log the new activity
     }
 
 
