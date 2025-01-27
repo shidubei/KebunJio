@@ -1,6 +1,7 @@
 package iss.nus.edu.sg.sa4106.kebunjio.service.reminders
 
 import android.util.Log
+import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -16,13 +17,35 @@ object PlantApiService  {
 
     private const val BASE_URL = "https://localhost.com/api/"
 
-    //Http GET request to retrieve data
-    private fun getPlants(): String {
+    //Http GET request to retrieve plant objects
+    fun getPlants(): List<Plant> {
         val url = URL(BASE_URL + "plants")
         val connection = url.openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
         connection.connectTimeout = 5000
-        return getResponse(connection)
+
+        val response = getResponse(connection)
+        return parsePlantsResponse(response)
+    }
+
+    private fun parsePlantsResponse(response: String): List<Plant> {
+        val plantsList = mutableListOf<Plant>()
+        try {
+            val jsonArray = JSONObject(response).getJSONArray("plants")
+            for (i in 0 until jsonArray.length()) {
+                val plantJson = jsonArray.getJSONObject(i)
+                val plant = Plant(
+                    plantId = plantJson.getInt("plantId"),
+                    ediblePlantSpeciesId = plantJson.getInt("ediblePlantSpeciesId"),
+                    userId = plantJson.getInt("userId"),
+                    name = plantJson.getString("name")
+                )
+                plantsList.add(plant)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return plantsList
     }
 
     //Http PUT request to update plant data by Id
@@ -75,6 +98,4 @@ object PlantApiService  {
             connection.disconnect()
         }
     }
-
-
 }
