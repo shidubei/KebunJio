@@ -33,7 +33,7 @@ def hello():
 @app.route('/predictSpecies', methods=['GET','POST'])
 def predictSpecies():
     #ret_string = 'Reading...'
-    epoch_data = open('epoch_19.pkl','rb')
+    epoch_data = open('epoch_19_small.pkl','rb')
     status_dict = pickle.load(epoch_data)
     epoch_data.close()
 
