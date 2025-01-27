@@ -23,6 +23,8 @@ public class Post {
 	private Boolean answerSolved;
 	
 //	private User user;
+	
+	public Post() {}
 
 	public String getId() {
 		return id;

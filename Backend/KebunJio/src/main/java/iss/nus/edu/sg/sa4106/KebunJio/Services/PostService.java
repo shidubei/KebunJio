@@ -55,6 +55,25 @@ public class PostService {
 			return null;
 		}
 	}
+	//Function4: UpdatePostByPostId
+	public boolean UpdatePostByPostId(String id,PostDAO updatePost) {
+		boolean result = false;
+		// try to find the post
+		Optional<Post> post = postRepository.findById(id);
+		if(post.isPresent()) {
+			Post newPost = post.get();
+			newPost.setTitle(updatePost.title);
+			newPost.setContent(updatePost.content);
+			try {
+				postRepository.save(newPost);
+				result = true;
+			}catch(Exception e) {
+				throw new RuntimeException("Update Post Error");
+			}
+		}
+		
+		return result;
+	}
 	
 	
 	//Function for Junit and GithubActions
