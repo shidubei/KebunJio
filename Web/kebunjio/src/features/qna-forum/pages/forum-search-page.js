@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
 import '../styling/forum-page.css'
@@ -6,32 +6,45 @@ import PostSneakPeak from '../components/post-sneak-peek';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const posts = [{
-  username: "Kelly",
-  time: new Date("2025-01-27").toDateString(),
-  title: "What is wrong with my cabbage",
-  content: "Can anyone tell me what's wrong with my cabbage?",
-  upvote: 50,
-  comment: 12
-},
-{
-  username: "Kelly",
-  time: new Date("2025-01-27").toDateString(),
-  title: "What is wrong with my cabbage",
-  content: "Can anyone tell me what's wrong with my cabbage?",
-  upvote: 50,
-  comment: 12
-},
-{
-  username: "Kelly",
-  time: new Date("2025-01-27").toDateString(),
-  title: "What is wrong with my cabbage",
-  content: "Can anyone tell me what's wrong with my cabbage?",
-  upvote: 50,
-  comment: 12
-}]
-
 function ForumSearchPage() {
+  const search_result = [{
+    username: "Kelly",
+    time: new Date("2025-01-27").toDateString(),
+    title: "What is wrong with my cabbage",
+    tag: "tag1",
+    content: "Can anyone tell me what's wrong with my cabbage?",
+    upvote: 50,
+    comment: 12
+  },
+  {
+    username: "Kelly",
+    time: new Date("2025-01-27").toDateString(),
+    title: "What is wrong with my cabbage",
+    content: "Can anyone tell me what's wrong with my cabbage?",
+    tag: "tag1",
+    upvote: 50,
+    comment: 12
+  },
+  {
+    username: "Kelly",
+    time: new Date("2025-01-27").toDateString(),
+    title: "What is wrong with my cabbage",
+    content: "Can anyone tell me what's wrong with my cabbage?",
+    tag: "tag1",
+    upvote: 50,
+    comment: 12
+  }]
+
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchInputChange = (event) => {
+      setSearchInput(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    console.log(searchInput)
+  }
+
   return (
     <div>
       <Appbar/>
@@ -47,13 +60,14 @@ function ForumSearchPage() {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={handleSearchInputChange}
               />
-              <Button variant="primary">Search</Button>
+              <Button variant="primary" onClick={handleSearchSubmit}>Search</Button>
             </Form>
           </div>
           <div>
             <p>Search result:</p>
-            {posts.length!=0?(posts.map((post,index)=>(
+            {search_result.length!==0?(search_result.map((post,index)=>(
               <PostSneakPeak key={index} post={post}/>
             ))):(<p>No result</p>)}
           </div>

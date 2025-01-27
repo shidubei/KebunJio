@@ -6,24 +6,23 @@ import PostInsight from "./post-insight";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
-
-function FullPost(){
+const FullPost = ({post}) => {
     return(
         <div>
             <div>
                 <Container>
                     <Row><PostHeader/></Row>
                     <Row>
-                        <b>Title</b>
-                        <p>Tag</p>
-                        <p>Content</p>
+                        <b>{post.title}</b>
+                        <p>{post.tag}</p>
+                        <p>{post.content}</p>
                     </Row>
                     <Row>
                         <Col>
                             <PostInsight/>
                         </Col>
                         <Col>
-                            <Button>Vote</Button>
+                            <Button>Upvote</Button>
                         </Col>
                     </Row>
 

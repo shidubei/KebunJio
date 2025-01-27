@@ -3,12 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
 
-function ReplyInsight(){
+const ReplyInsight = ({like, dislike}) => {
     return(
         <Container>
             <Row>
-                <Col>Like: 12</Col>
-                <Col>Dislike: 5</Col>
+                <Col>Like: {like}</Col>
+                <Col>Dislike: {dislike}</Col>
             </Row>
         </Container>
     )
