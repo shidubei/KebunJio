@@ -6,50 +6,27 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
 public class AES_password {
-    public static void main(String[] args) throws Exception {
-        // 明文数据
-        String plainText = "Hello, AES Encryption!";
+    private static final String ALGORITHM = "AES";
+    private static final String TRANSFORMATION = "AES";
 
-        // 生成密钥
-        SecretKey secretKey = generateKey();
+    // 密钥（生产环境建议使用配置文件管理密钥）
+    private static final String SECRET_KEY = "1234567890123456"; // 必须是16字节
 
-        // 转换密钥为字节数组（为了演示，通常密钥应该安全保存）
-        byte[] keyBytes = secretKey.getEncoded();
-
-        // 打印密钥
-        System.out.println("Generated Key: " + Base64.getEncoder().encodeToString(keyBytes));
-
-        // 加密
-        String encryptedText = encrypt(plainText, keyBytes);
-        System.out.println("Encrypted Text: " + encryptedText);
-
-        // 解密
-        String decryptedText = decrypt(encryptedText, keyBytes);
-        System.out.println("Decrypted Text: " + decryptedText);
+    // 加密
+    public static String encrypt(String data) throws Exception {
+        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encryptedBytes = cipher.doFinal(data.getBytes());
+        return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
-    // 生成AES密钥
-    public static SecretKey generateKey() throws Exception {
-        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(128); // AES支持128/192/256位密钥
-        return keyGen.generateKey();
-    }
-
-    // 加密方法
-    public static String encrypt(String plainText, byte[] keyBytes) throws Exception {
-        SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, keySpec);
-        byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
-        return Base64.getEncoder().encodeToString(encryptedBytes); // 转Base64便于展示
-    }
-
-    // 解密方法
-    public static String decrypt(String encryptedText, byte[] keyBytes) throws Exception {
-        SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, keySpec);
-        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+    // 解密
+    public static String decrypt(String encryptedData) throws Exception {
+        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
         return new String(decryptedBytes);
     }
 }
