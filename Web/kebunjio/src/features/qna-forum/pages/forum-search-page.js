@@ -6,6 +6,31 @@ import PostSneakPeak from '../components/post-sneak-peek';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+const posts = [{
+  username: "Kelly",
+  time: new Date("2025-01-27").toDateString(),
+  title: "What is wrong with my cabbage",
+  content: "Can anyone tell me what's wrong with my cabbage?",
+  upvote: 50,
+  comment: 12
+},
+{
+  username: "Kelly",
+  time: new Date("2025-01-27").toDateString(),
+  title: "What is wrong with my cabbage",
+  content: "Can anyone tell me what's wrong with my cabbage?",
+  upvote: 50,
+  comment: 12
+},
+{
+  username: "Kelly",
+  time: new Date("2025-01-27").toDateString(),
+  title: "What is wrong with my cabbage",
+  content: "Can anyone tell me what's wrong with my cabbage?",
+  upvote: 50,
+  comment: 12
+}]
+
 function ForumSearchPage() {
   return (
     <div>
@@ -28,7 +53,9 @@ function ForumSearchPage() {
           </div>
           <div>
             <p>Search result:</p>
-            <PostSneakPeak/>
+            {posts.length!=0?(posts.map((post,index)=>(
+              <PostSneakPeak key={index} post={post}/>
+            ))):(<p>No result</p>)}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from "react-bootstrap/Col";
 
 
-function PostHeader(){
+const PostHeader = ({username, time}) =>{
     return(
         <Container>
             <Row>
@@ -13,8 +13,8 @@ function PostHeader(){
                     <Image src="../../../media/placeholder.jpg" roundedCircle ></Image>
                 </Col>
                 <Col>
-                    <Row>@Username</Row>
-                    <Row>12 November 2020 19:35</Row>
+                    <Row>{username}</Row>
+                    <Row>{time}</Row>
                 </Col>
                 <Col>
                     Menu
