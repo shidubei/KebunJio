@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityPlantHealthCheckBinding
+import iss.nus.edu.sg.sa4106.kebunjio.service.reminders.PlantApiService
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -31,6 +32,7 @@ class PlantHealthCheckActivity : AppCompatActivity() {
     }
     // Declare imageCapture as a class-level variable
     private var imageCapture: ImageCapture? = null
+    private val apiService = PlantApiService
 
 
 
@@ -40,7 +42,15 @@ class PlantHealthCheckActivity : AppCompatActivity() {
         binding = ActivityPlantHealthCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         checkPermissions()
+        initButtons()
+        startCamera()
+
+    }
+
+    private fun initButtons() {
 
         binding.captureButton.setOnClickListener {
             capturePhoto()
@@ -49,7 +59,10 @@ class PlantHealthCheckActivity : AppCompatActivity() {
         binding.galleryButton.setOnClickListener {
             openGallery()
         }
-        startCamera()
+
+        binding.viewPlantsButton.setOnClickListener {
+            getUserPlants()
+        }
     }
 
     private fun startCamera() {
@@ -81,6 +94,7 @@ class PlantHealthCheckActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
+    //Logic for Capturing a new plant photo
     private fun capturePhoto() {
         val imageCapture = imageCapture ?: return
 
@@ -110,10 +124,19 @@ class PlantHealthCheckActivity : AppCompatActivity() {
         // Display captured image in ImageView or navigate to the next screen
     }
 
+    //Logic for Open Gallery
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_GALLERY_IMAGE)
     }
+
+
+
+    //Logic for viewing user's own plant
+    private fun getUserPlants() {
+        ViewPlantViewModel.fetchUserPlants()
+    }
+
 
     private fun retrieveOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
@@ -122,6 +145,7 @@ class PlantHealthCheckActivity : AppCompatActivity() {
         return if (mediaDir != null && mediaDir.exists()) mediaDir else filesDir
     }
 
+    //Permissions for Camera
     private fun checkPermissions() {
         val requiredPermissions = arrayOf(android.Manifest.permission.CAMERA)
         if (requiredPermissions.all {
@@ -143,6 +167,18 @@ class PlantHealthCheckActivity : AppCompatActivity() {
             }
         }
     }
+
+    //Diagnose plant using ML service
+    private fun diagnosePlant() {
+
+        //If successful diagnosis
+        showToast("Diagnosing plant...")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+    //Need to understand this
     companion object {
         private const val REQUEST_GALLERY_IMAGE = 1
         private const val PERMISSIONS_REQUEST_CODE = 101
