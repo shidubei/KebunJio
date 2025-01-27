@@ -1,4 +1,4 @@
-package iss.nus.edu.sg.sa4106.KebunJio.Configurer;
+package iss.nus.edu.sg.sa4106.KebunJio.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,12 +25,14 @@ public class ForumController {
 	@Autowired
 	private PostService postService;
 	
+	//URL: /Forum
 	@GetMapping
 	public ResponseEntity getAllPosts() {
 		List<Post> postList = postService.getAllPosts();
 		return new ResponseEntity<>(postList,HttpStatus.OK);
 	}
 	
+	// URL:/Forum/Post/Create
 	@PostMapping("/Post/Create")
 	public ResponseEntity createNewPost(@RequestBody @Valid PostDAO postData,BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -46,7 +48,7 @@ public class ForumController {
 		
 	}
 	
-	
+	// URL: /Forum/Post/{id}
 	@GetMapping("/Post/{id}")
 	public ResponseEntity getPostById(@PathVariable String id) {
 		Post post = postService.getPostByPostId(id);

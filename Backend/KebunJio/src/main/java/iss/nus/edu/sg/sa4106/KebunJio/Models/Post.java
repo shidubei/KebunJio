@@ -21,6 +21,7 @@ public class Post {
 	private String questionStatus;
 	private LocalDateTime publishedDateTime;
 	private Boolean answerSolved;
+	private String userId;
 	
 //	private User user;
 	
@@ -74,11 +75,4 @@ public class Post {
 		this.answerSolved = answerSolved;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
 }
