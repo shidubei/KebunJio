@@ -1,12 +1,42 @@
-package iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails
+package iss.nus.edu.sg.sa4106.kebunjio
 
 import iss.nus.edu.sg.sa4106.kebunjio.data.EdiblePlantSpecies
+import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 
 class DummyData {
     
     val SpeciesDummy:MutableList<EdiblePlantSpecies> = mutableListOf<EdiblePlantSpecies>()
+    val PlantDummy: MutableList<Plant> = mutableListOf<Plant>()
 
     init {
+        setupSpeciesDummy()
+    }
+
+
+    private fun setupPlantDummy() {
+        val plant1 = Plant(0,0,0,"User 0 Type 0")
+        PlantDummy.add(plant1)
+        val plant2 = Plant(1,1,0,"User 0 Type 1")
+        PlantDummy.add(plant2)
+        val plant3 = Plant(2,1,1,"Plant 1 Type 1")
+        PlantDummy.add(plant3)
+        val plant4 = Plant(3,2,1,"User 1 Type 2")
+        PlantDummy.add(plant4)
+    }
+
+
+    public fun getUserPlants(userId: Int): MutableList<Plant> {
+        val toReturn = mutableListOf<Plant>()
+        for (i in 0..PlantDummy.size-1) {
+            if (PlantDummy[i].userId == userId) {
+                toReturn.add(PlantDummy[i])
+            }
+        }
+        return toReturn
+    }
+
+
+    private fun setupSpeciesDummy() {
         val species1 = EdiblePlantSpecies(
             0,
             "Bang Kwang",
@@ -56,6 +86,7 @@ class DummyData {
             "https://gardeningsg.nparks.gov.sg/images/Gardeners/Harvesting%20(8).jpg")
         SpeciesDummy.add(species3)
     }
+
 
     public fun nameList(): MutableList<String> {
         var theList = mutableListOf<String>()

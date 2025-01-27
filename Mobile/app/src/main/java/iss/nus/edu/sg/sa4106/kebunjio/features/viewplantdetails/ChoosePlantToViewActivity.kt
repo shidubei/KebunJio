@@ -10,7 +10,7 @@ import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityChoosePlantToViewBinding
 
 // for testing
-import iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails.DummyData
+import iss.nus.edu.sg.sa4106.kebunjio.DummyData
 
 class ChoosePlantToViewActivity : AppCompatActivity() {
 

@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -19,6 +20,8 @@ import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityAddPlantBinding
 import iss.nus.edu.sg.sa4106.kebunjio.service.mlModel.MlModelService
 import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
+import iss.nus.edu.sg.sa4106.kebunjio.DummyData
+
 
 class AddPlantActivity : AppCompatActivity() {
 
@@ -28,6 +31,7 @@ class AddPlantActivity : AppCompatActivity() {
     private lateinit var nameEditText: EditText
     private lateinit var speciesSpinner: Spinner
     private lateinit var addPlantBtn: Button
+    private var dummyData: DummyData = DummyData()
 
     // services
     //variables for service, set bound to false
@@ -79,6 +83,15 @@ class AddPlantActivity : AppCompatActivity() {
         speciesSpinner = binding.speciesSpinner
         addPlantBtn = binding.addPlantBtn
 
+        // set the spinner options
+        val spinnerOptions = dummyData.nameList()
+        val spinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
+                                                                        android.R.layout.simple_spinner_item,
+                                                                        spinnerOptions)
+
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        speciesSpinner.adapter = spinAdapter
+
         addPlantBtn.setOnClickListener {
             addNewPlant()
         }
@@ -97,7 +110,7 @@ class AddPlantActivity : AppCompatActivity() {
 
     private fun addNewPlant() {
         val plantId = -1 // Must assign a proper id later
-        val ediblePlantSpeciesId = -1 // must assign a proper id later
+        val ediblePlantSpeciesId = speciesSpinner.selectedItemPosition // must assign a proper id later
         val userId = -1 // must assign a proper id later
         val name = nameEditText.text.toString()
         val newPlant = Plant(plantId, ediblePlantSpeciesId, userId, name)
