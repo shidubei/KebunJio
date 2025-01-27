@@ -20,11 +20,11 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/event" element={<EventPage />} />
-          <Route path="/forum/top" element={<ForumTopPage/>} />
+          <Route path="/forum" element={<ForumTopPage/>} />
           <Route path="/forum/search" element={<ForumSearchPage/>} />
           <Route path="/forum/new" element={<ForumNewPost/>} /> 
           <Route path="/forum/my" element={<ForumMyPage/>} /> 
-          <Route path="/forum/post/view" element={<ViewPost/>} /> 
+          <Route path="/forum/post" element={<ViewPost/>} /> 
           <Route path="/user-profile" element={<UserProfilePage/>} />
         </Routes>
     </BrowserRouter>

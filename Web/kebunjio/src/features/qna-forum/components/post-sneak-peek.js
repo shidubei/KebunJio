@@ -15,9 +15,9 @@ function trimContent(content) {
     }
 }
 
-const PostSneakPeak = ({post}) => {
+const PostSneakPeak = ({post, onClick}) => {
     return(
-        <div>
+        <div onClick={onClick}>
             <Container>
                 <Row><PostHeader username={post.username} time={post.time}/></Row>
                 <Row>

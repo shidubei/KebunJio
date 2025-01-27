@@ -19,7 +19,7 @@ const FullPost = ({post}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <PostInsight/>
+                            <PostInsight upvote={post.upvote} comment={post.comment}/>
                         </Col>
                         <Col>
                             <Button>Upvote</Button>

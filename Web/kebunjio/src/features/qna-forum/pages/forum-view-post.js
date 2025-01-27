@@ -4,24 +4,15 @@ import FullPost from '../components/full-post'
 import Reply from "../components/reply";
 import Form from 'react-bootstrap/Form';
 import { Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
 import '../styling/forum-page.css'
 
 function Post(){
-
-    const [replyInput, setReplyInput] = useState('')
-
-    const post = {
-        username: "Kelly",
-        time: new Date("2025-01-27").toDateString(),
-        title: "What is wrong with my cabbage",
-        content: "Can anyone tell me what's wrong with my cabbage?",
-        tag: "tag1",
-        upvote: 50,
-        comment: 12
-    }
+    const location = useLocation();
+    const { post } = location.state || {}; 
 
     const replies = [{
         username: "Yasmine",
@@ -38,8 +29,14 @@ function Post(){
         dislike: 3
     }]
 
+    const [replyInput, setReplyInput] = useState('')
+
     const handleReplyInputChange = (event) => {
         setReplyInput(event.target.value)
+    }
+
+    if (!post) {
+        return <p>No post data available. Please navigate through the forum page.</p>;
     }
 
     return(
