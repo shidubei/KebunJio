@@ -25,7 +25,6 @@
             android:name=".service.DownloadImageService"
             android:enabled="true"
             android:exported="true" />
-
         <activity
             android:name=".features.logactivities.LogActivitiesActivity"
             android:exported="false" />
@@ -50,6 +49,9 @@
         <activity
             android:name=".features.addplant.AddPlantActivity"
             android:exported="false" />
+        <activity android:name=".features.reminders.ReminderActivity">
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
