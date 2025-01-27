@@ -6,6 +6,7 @@ public class User {
 	private String email;
 	private String phoneNumber;
 	private boolean isAdmin;
+	private String password;
 	
 	public User() {}
 
@@ -48,6 +49,10 @@ public class User {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
+	public String getPassword(){return password;}
+
+	public void setPassword(String password){this.password=password;}
 	
 	
 	
