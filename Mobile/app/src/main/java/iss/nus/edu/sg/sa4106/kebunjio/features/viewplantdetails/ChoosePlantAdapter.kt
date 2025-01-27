@@ -96,5 +96,6 @@ class ChoosePlantAdapter(private val context: Context,
     protected fun showImage(filename: String?) {
         val bitmap = BitmapFactory.decodeFile(filename)
         showSpeciesImg.setImageBitmap(bitmap)
+        getContext().deleteFile(filename)
     }
 }

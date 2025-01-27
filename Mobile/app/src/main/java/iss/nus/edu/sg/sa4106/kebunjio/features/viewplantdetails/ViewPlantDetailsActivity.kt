@@ -120,6 +120,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
     protected fun showImage(filename: String?) {
         val bitmap = BitmapFactory.decodeFile(filename)
         showPlantImg.setImageBitmap(bitmap)
+        deleteFile(filename)
     }
 
 }
