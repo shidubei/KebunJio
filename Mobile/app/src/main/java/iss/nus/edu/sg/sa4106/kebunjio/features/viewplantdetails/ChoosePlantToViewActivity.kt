@@ -9,6 +9,9 @@ import androidx.core.view.WindowInsetsCompat
 import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityChoosePlantToViewBinding
 
+// for testing
+import iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails.DummyData
+
 class ChoosePlantToViewActivity : AppCompatActivity() {
 
     private var _binding: ActivityChoosePlantToViewBinding? = null
@@ -33,10 +36,18 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
             insets
         }
 
+
+        // make dummy data
+        val dummy = DummyData()
+
+
         // get the species list view
         speciesList = binding.speciesList
 
+
+        speciesList.adapter = ChoosePlantAdapter(this,dummy.idList(),dummy.urlList(),dummy.nameList())
+        //speciesList.setOnItemClickListener(this)
         //update grid view
-        (speciesList.adapter as ChoosePlantAdapter).notifyDataSetChanged()
+        //(speciesList.adapter as ChoosePlantAdapter).notifyDataSetChanged()
     }
 }

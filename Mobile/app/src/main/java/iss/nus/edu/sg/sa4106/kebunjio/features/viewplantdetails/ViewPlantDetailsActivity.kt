@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +18,7 @@ import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityViewPlantDetailsBinding
 import iss.nus.edu.sg.sa4106.kebunjio.data.EdiblePlantSpecies
 import iss.nus.edu.sg.sa4106.kebunjio.service.DownloadImageService
+import java.io.File
 
 class ViewPlantDetailsActivity : AppCompatActivity() {
 
@@ -36,6 +39,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
     lateinit var growingSpaceText: TextView
     lateinit var fertilizerTipsText: TextView
     lateinit var specialNeedsText: TextView
+    lateinit var backBtn: Button
 
     // for downloading images
     protected var receiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -43,7 +47,25 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
             val action = intent.action
             if (action != null && action == "download_completed") {
                 val filename = intent.getStringExtra("filename")
-                showImage(filename)
+                Log.d("ViewPlantDetailsActivity", "filename: ${filename}")
+                if (filename != null) {
+                    val bitmap = BitmapFactory.decodeFile(filename)
+                    showPlantImg.setImageBitmap(bitmap)
+                    val file = File(filename)
+                    if (file.exists()) {
+                        val handler = android.os.Handler()
+                        handler.postDelayed({
+                            file.delete()
+                        },5000)
+
+                    }
+                //if (file.exists() && file.delete()) {
+                    //    Log.d("ViewPlantDetailsActivity", "File deleted successfully")
+                    //} else {
+                    //    Log.e("ViewPlantDetailsActivity", "Failed to delete the file")
+                    //}
+                }
+
             }
         }
     }
@@ -69,6 +91,11 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         growingSpaceText = binding.growingSpaceText
         fertilizerTipsText = binding.fertilizerTipsText
         specialNeedsText = binding.specialNeedsText
+        backBtn = binding.goBackBtn
+
+        backBtn.setOnClickListener {
+            finish()
+        }
 
         // setup to receive broadcast from MyDownloadService
         initReceiver()
@@ -82,7 +109,9 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         // get the id to show
         val showId = intent.getIntExtra("ediblePlantId",-1)
         if (showId != -1) {
-            // Download the data corresponding to the ID and then show species
+            // make dummy data
+            val dummy = DummyData()
+            showNewSpecies(dummy.SpeciesDummy[showId])
         }
     }
 
@@ -114,13 +143,9 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         val intent = Intent(this, DownloadImageService::class.java)
         intent.setAction("download_file")
         intent.putExtra("url", imgURL)
+        intent.putExtra("returnBitmap",false)
+        Log.d("ViewPlantDetailsActivity","Requested URL: ${imgURL}")
         startService(intent)
-    }
-
-    protected fun showImage(filename: String?) {
-        val bitmap = BitmapFactory.decodeFile(filename)
-        showPlantImg.setImageBitmap(bitmap)
-        deleteFile(filename)
     }
 
 }

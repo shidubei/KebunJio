@@ -16,7 +16,6 @@
         android:theme="@style/Theme.KebunJio"
         tools:targetApi="31">
 
-
         <service
             android:name=".service.mlModel.MlModelService"
             android:enabled="true"

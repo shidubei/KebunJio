@@ -2,96 +2,70 @@ package iss.nus.edu.sg.sa4106.kebunjio.service
 
 import android.app.Service
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Environment
 import android.os.IBinder
 import android.util.Log
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.UUID
 
-class DownloadImageService : Service() {
+class DownloadImageServiceOld : Service() {
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         if (intent.action.equals("download_file") || intent.action.equals("download_file_id")) {
 
-            val returnIntent = Intent()
-
             val url = intent.getStringExtra("url")
             Log.d("DownloadImageService","url is ${url}")
-
             val isId = intent.action.equals("download_file_id")
             Log.d("DownloadImageService","isId is ${isId}")
-
             val returnBitmap = intent.getBooleanExtra("returnBitmap",false)
-
             var id = -1
             if (isId) {
                 id = intent.getIntExtra("id",-1)
-                returnIntent.putExtra("id",id)
-
-                returnIntent.setAction("download_completed_id")
-
                 Log.d("DownloadImageService","id is ${id}")
-            } else {
-                returnIntent.setAction("download_completed")
             }
-
             if (url != null) {
-                startImageDownload(url, returnIntent, returnBitmap)
+                startImageDownload(url, returnBitmap, isId, id)
             }
         }
 
         return super.onStartCommand(intent, flags, startId)
     }
 
+    protected fun startImageDownload(imgURL: String, returnBitmap: Boolean, isId: Boolean, id: Int) {
+        val ext = getFileExtension(imgURL)
+        val file = createDestFile(ext)
 
-    private fun startImageDownload(imgURL: String, returnIntent: Intent, returnBitmap: Boolean) {
+        // creating and starting a background thread
         Thread {
-            if (downloadImage(imgURL, returnBitmap, returnIntent)) {
-                Log.d("DownloadImageService","Sending broadcast")
-                sendBroadcast(returnIntent)
+            val intent = Intent()
+            val downloadSuccess = false
+            if (downloadImage(imgURL, file)) {
+
+                if (isId) {
+                    intent.setAction("download_completed_id")
+                    intent.putExtra("id",id)
+                } else {
+                    intent.setAction("download_completed")
+                }
+                intent.putExtra("filename", file.absolutePath)
+                sendBroadcast(intent)
             }
         }.start()
     }
 
-    private fun downloadImage(imgURL: String, returnBitmap: Boolean, intent: Intent): Boolean {
+    private fun downloadImage(imgURL: String, file: File): Boolean {
         var conn : HttpURLConnection? = null
 
         try {
+            val url = URL(imgURL)
 
-            conn = makeConnection(imgURL)
+            conn = url.openConnection() as HttpURLConnection
+            conn.requestMethod = "GET" // optional; default is GET
 
             if (conn.responseCode == HttpURLConnection.HTTP_OK) {
-                Log.d("DownloadImageService","Connection made")
-                if (returnBitmap) {
-                    val bitmap = outputToBitmap(conn)
-                    Log.d("DownloadImageService","Bitmap Downloaded")
-                    val byteArrayOutputStream = ByteArrayOutputStream()
-
-                    if(imgURL.contains(".png")){
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-                    }
-                    else{
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-                    }
-                    val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-                    Log.d("DownloadImageService","Bitmap Byte Array Created")
-                    intent.putExtra("bitmapByteArray",byteArray)
-                    Log.d("DownloadImageService","Bitmap Byte Array Put Extra Successful")
-
-
-                } else {
-                    val ext = getFileExtension(imgURL)
-                    val file = createDestFile(ext)
-                    outputToFile(conn, file)
-                    intent.putExtra("filename", file.absolutePath)
-                }
-
+                outputToFile(conn, file)
             }
 
             return true
@@ -101,13 +75,6 @@ class DownloadImageService : Service() {
             conn?.disconnect()
         }
     }
-
-    private fun outputToBitmap(conn: HttpURLConnection): Bitmap {
-        val inp = conn.inputStream
-        val bitmap: Bitmap = BitmapFactory.decodeStream(inp)
-        return bitmap
-    }
-
 
     private fun outputToFile(conn: HttpURLConnection, file: File) {
         val inp = conn.inputStream
@@ -129,17 +96,6 @@ class DownloadImageService : Service() {
 
         inp.close()
         outp.close()
-    }
-
-    private fun makeConnection(imgURL: String): HttpURLConnection {
-        var conn : HttpURLConnection? = null
-
-        val url = URL(imgURL)
-
-        conn = url.openConnection() as HttpURLConnection
-        conn.requestMethod = "GET" // optional; default is GET
-
-        return conn
     }
 
     public fun getFileExtension(str: String) : String {
