@@ -1,5 +1,6 @@
 package iss.nus.edu.sg.sa4106.kebunjio
 
+import iss.nus.edu.sg.sa4106.kebunjio.data.ActivityLog
 import iss.nus.edu.sg.sa4106.kebunjio.data.EdiblePlantSpecies
 import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 
@@ -7,9 +8,33 @@ class DummyData {
     
     val SpeciesDummy:MutableList<EdiblePlantSpecies> = mutableListOf<EdiblePlantSpecies>()
     val PlantDummy: MutableList<Plant> = mutableListOf<Plant>()
+    val ActivityLogDummy: MutableList<ActivityLog> = mutableListOf<ActivityLog>()
 
     init {
         setupSpeciesDummy()
+        setupPlantDummy()
+        setupLogDummy()
+    }
+
+
+    private fun setupLogDummy() {
+        val log1 = ActivityLog(0,0,0,"Water","500ml","01/01/2020 15:30")
+        ActivityLogDummy.add(log1)
+        val log2 = ActivityLog(0,0,0,"Water","500ml","02/01/2020 15:26")
+        ActivityLogDummy.add(log2)
+        val log3 = ActivityLog(0,0,1,"Fertiliser","500ml","02/01/2020 15:28")
+        ActivityLogDummy.add(log3)
+    }
+
+
+    public fun getPlantLogs(plantId: Int): MutableList<ActivityLog> {
+        val toReturn = mutableListOf<ActivityLog>()
+        for (i in 0..ActivityLogDummy.size-1) {
+            if (ActivityLogDummy[i].plantId == plantId) {
+                toReturn.add(ActivityLogDummy[i])
+            }
+        }
+        return toReturn
     }
 
 

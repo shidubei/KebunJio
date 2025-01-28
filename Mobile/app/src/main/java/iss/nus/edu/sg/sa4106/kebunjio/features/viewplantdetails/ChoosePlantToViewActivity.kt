@@ -16,8 +16,10 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
 
     private var _binding: ActivityChoosePlantToViewBinding? = null
     private val binding get() = _binding!!
+    private val dummy = DummyData()
+    private val userId = 0
 
-    lateinit var speciesList: ListView
+    lateinit var plantList: ListView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +38,19 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
             insets
         }
 
-
-        // make dummy data
-        val dummy = DummyData()
-
-
         // get the species list view
-        speciesList = binding.speciesList
+        plantList = binding.plantList
 
+        val userPlants = dummy.getUserPlants(0)
+        val idList: MutableList<Int> = mutableListOf<Int>()
+        val nameList: MutableList<String> = mutableListOf<String>()
 
-        speciesList.adapter = ChoosePlantAdapter(this,dummy.idList(),dummy.urlList(),dummy.nameList())
+        for (i in 0..userPlants.size-1) {
+            idList.add(userPlants[i].plantId)
+            nameList.add(userPlants[i].name)
+        }
+
+        plantList.adapter = PlantToChooseAdapter(this,idList,nameList)
         //speciesList.setOnItemClickListener(this)
         //update grid view
         //(speciesList.adapter as ChoosePlantAdapter).notifyDataSetChanged()

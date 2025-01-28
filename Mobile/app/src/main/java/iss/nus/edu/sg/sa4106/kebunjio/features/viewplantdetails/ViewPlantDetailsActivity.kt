@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,50 +27,40 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
     // for the UI
     private var _binding: ActivityViewPlantDetailsBinding? = null
     private val binding get() = _binding!!
-    private var currentSpecies: EdiblePlantSpecies? = null
+
     lateinit var plantNameText: TextView
-    lateinit var sciNameText: TextView
-    lateinit var showPlantImg: ImageView
-    lateinit var edibleGroupText: TextView
-    lateinit var descriptionText: TextView
-    lateinit var waterTipsText: TextView
-    lateinit var sunlightText: TextView
-    lateinit var soilTypeText: TextView
-    lateinit var harvestTimeText: TextView
-    lateinit var commonPestsText: TextView
-    lateinit var growingSpaceText: TextView
-    lateinit var fertilizerTipsText: TextView
-    lateinit var specialNeedsText: TextView
+    lateinit var speciesNameText: TextView
+    lateinit var listLog: ListView
     lateinit var backBtn: Button
 
-    // for downloading images
-    protected var receiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val action = intent.action
-            if (action != null && action == "download_completed") {
-                val filename = intent.getStringExtra("filename")
-                Log.d("ViewPlantDetailsActivity", "filename: ${filename}")
-                if (filename != null) {
-                    val bitmap = BitmapFactory.decodeFile(filename)
-                    showPlantImg.setImageBitmap(bitmap)
-                    val file = File(filename)
-                    if (file.exists()) {
-                        val handler = android.os.Handler()
-                        handler.postDelayed({
-                            file.delete()
-                        },5000)
+    private val dummy = DummyData()
 
-                    }
+    // for downloading images
+    //protected var receiver: BroadcastReceiver = object : BroadcastReceiver() {
+    //    override fun onReceive(context: Context, intent: Intent) {
+    //        val action = intent.action
+    //        if (action != null && action == "download_completed") {
+    //            val filename = intent.getStringExtra("filename")
+    //            Log.d("ViewPlantDetailsActivity", "filename: ${filename}")
+    //            if (filename != null) {
+    //                val bitmap = BitmapFactory.decodeFile(filename)
+    //                showPlantImg.setImageBitmap(bitmap)
+    //                val file = File(filename)
+    //                if (file.exists()) {
+    //                    val handler = android.os.Handler()
+    //                    handler.postDelayed({
+    //                        file.delete()
+    //                    },5000)
+    //                }
                 //if (file.exists() && file.delete()) {
                     //    Log.d("ViewPlantDetailsActivity", "File deleted successfully")
                     //} else {
                     //    Log.e("ViewPlantDetailsActivity", "Failed to delete the file")
                     //}
-                }
-
-            }
-        }
-    }
+    //            }
+    //        }
+    //    }
+    //}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,18 +71,8 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         plantNameText = binding.plantNameText
-        sciNameText = binding.sciNameText
-        showPlantImg = binding.showPlantImg
-        edibleGroupText = binding.edibleGroupText
-        descriptionText = binding.descriptionText
-        waterTipsText = binding.waterTipsText
-        sunlightText = binding.sunlightText
-        soilTypeText = binding.soilTypeText
-        harvestTimeText = binding.harvestTimeText
-        commonPestsText = binding.commonPestsText
-        growingSpaceText = binding.growingSpaceText
-        fertilizerTipsText = binding.fertilizerTipsText
-        specialNeedsText = binding.specialNeedsText
+        speciesNameText = binding.speciesNameText
+        listLog = binding.logList
         backBtn = binding.goBackBtn
 
         backBtn.setOnClickListener {
@@ -99,7 +80,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         }
 
         // setup to receive broadcast from MyDownloadService
-        initReceiver()
+        //initReceiver()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -108,45 +89,42 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         }
 
         // get the id to show
-        val showId = intent.getIntExtra("ediblePlantId",-1)
-        if (showId != -1) {
+        val plantId = intent.getIntExtra("plantId",-1)
+        if (plantId != -1) {
             // make dummy data
-            val dummy = DummyData()
-            showNewSpecies(dummy.SpeciesDummy[showId])
+            showPlant(plantId)
         }
     }
 
-    private fun showNewSpecies(newSpecies: EdiblePlantSpecies) {
-        currentSpecies = newSpecies
-        plantNameText.text = currentSpecies!!.name
-        sciNameText.text = currentSpecies!!.scientificName
-        showPlantImg.setImageBitmap(null)
-        requestImageDL(currentSpecies!!.imageURL)
-        edibleGroupText.text = currentSpecies!!.ediblePlantGroup
-        descriptionText.text = currentSpecies!!.description
-        waterTipsText.text = currentSpecies!!.wateringTips
-        sunlightText.text = currentSpecies!!.sunlight
-        soilTypeText.text = currentSpecies!!.soilType
-        harvestTimeText.text = currentSpecies!!.harvestTime
-        commonPestsText.text = currentSpecies!!.commonPests
-        growingSpaceText.text = currentSpecies!!.growingSpace
-        fertilizerTipsText.text = currentSpecies!!.fertilizerTips
-        specialNeedsText.text = currentSpecies!!.specialNeeds
+    private fun showPlant(plantId: Int) {
+        val thisPlant = dummy.PlantDummy[plantId]
+        plantNameText.text = "Name: ${thisPlant.name}"
+        val thisSpecies = dummy.SpeciesDummy[thisPlant.ediblePlantSpeciesId]
+        val speciesText = "Species: ${thisSpecies.name} (${thisSpecies.scientificName})"
+        speciesNameText.text = speciesText
+        val loggedActivities = dummy.getPlantLogs(plantId)
+        val actTypeList = mutableListOf<String>()
+        val timestampList = mutableListOf<String>()
+        for (i in 0..loggedActivities.size-1) {
+            actTypeList.add(loggedActivities[i].activityType)
+            timestampList.add(loggedActivities[i].timestamp)
+        }
+        listLog.adapter = ViewPlantLogInDetailsAdapter(this,actTypeList,timestampList)
     }
 
-    protected fun initReceiver() {
-        val filter = IntentFilter()
-        filter.addAction("download_completed")
-        registerReceiver(receiver, filter, RECEIVER_EXPORTED)
-    }
+    //protected fun initReceiver() {
+    //    val filter = IntentFilter()
+    //    filter.addAction("download_completed")
+    //    registerReceiver(receiver, filter, RECEIVER_EXPORTED)
+    //}
 
-    protected fun requestImageDL(imgURL: String?) {
-        val intent = Intent(this, DownloadImageService::class.java)
-        intent.setAction("download_file")
-        intent.putExtra("url", imgURL)
-        intent.putExtra("returnBitmap",false)
-        Log.d("ViewPlantDetailsActivity","Requested URL: ${imgURL}")
-        startService(intent)
-    }
+    //protected fun requestImageDL(imgURL: String?) {
+    //    val intent = Intent(this, DownloadImageService::class.java)
+    //    intent.setAction("download_file")
+    //    intent.putExtra("url", imgURL)
+    //    intent.putExtra("returnBitmap",false)
+    //    Log.d("ViewPlantDetailsActivity","Requested URL: ${imgURL}")
+    //    startService(intent)
+    //}
 
 }

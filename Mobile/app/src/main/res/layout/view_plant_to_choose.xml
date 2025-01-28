@@ -8,12 +8,13 @@
         android:id="@+id/show_species_choose_img"
         android:layout_width="110dp"
         android:layout_height="110dp"
+        android:visibility="gone"
         android:scaleType="centerCrop" />
     <TextView
-        android:id="@+id/species_name_choose_text"
+        android:id="@+id/plant_name_choose_text"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:text="Name of Plant"
         />
 </LinearLayout>
