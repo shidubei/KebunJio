@@ -16,40 +16,43 @@ function ForumSearchPage() {
 
      /* const [posts, setPosts] = useState([]) */
  
-   const search_results = [{
-     id: 1,
-     username: "Kelly",
-     time: new Date("2025-01-27").toDateString(),
-     title: "What is wrong with my cabbage",
-     tag: "tag1",
-     content: "Can anyone tell me what's wrong with my cabbage?",
-     upvote: 50,
-     comment: 12,
-     hasLiked: true,
-   },
-   {
-     id: 2,
-     username: "Yasmine",
-     time: new Date("2025-01-28").toDateString(),
-     title: "What is wrong with my tomato",
-     content: "Can anyone tell me what's wrong with my tomato?",
-     tag: "tag2",
-     upvote: 40,
-     comment: 13,
-     hasLiked: false,
-
-   },
-   {
-     id: 3,
-     username: "KY",
-     time: new Date("2025-01-29").toDateString(),
-     title: "What is wrong with my spinach",
-     content: "Can anyone tell me what's wrong with my spinach?",
-     tag: "tag3",
-     upvote: 30,
-     comment: 14,
-     hasLiked: true,
-   }]
+     //dummy data for now
+     const search_results = [{
+      id: 1,
+      username: "Kelly",
+      time: new Date("2025-01-27").toDateString(),
+      title: "What is wrong with my cabbage",
+      tag: "tag1",
+      content: "Can anyone tell me what's wrong with my cabbage?",
+      upvote: 50,
+      comment: 12,
+      hasLiked: true,
+      hasImage: true,
+    },
+    {
+      id: 2,
+      username: "Yasmine",
+      time: new Date("2025-01-28").toDateString(),
+      title: "What is wrong with my tomato",
+      content: "Can anyone tell me what's wrong with my tomato?",
+      tag: "tag2",
+      upvote: 40,
+      comment: 13,
+      hasLiked: false,
+      hasImage: false,
+    },
+    {
+      id: 3,
+      username: "KY",
+      time: new Date("2025-01-29").toDateString(),
+      title: "What is wrong with my spinach",
+      content: "Can anyone tell me what's wrong with my spinach?",
+      tag: "tag3",
+      upvote: 30,
+      comment: 14,
+      hasLiked: true,
+      hasImage: true,
+    }]
 
   const [searchInput, setSearchInput] = useState('');
 

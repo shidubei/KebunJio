@@ -102,3 +102,10 @@
     font-size: 0.8rem;
     color: #666;
 }
+
+.post-image{
+    max-height:500px;
+    max-width:500px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}

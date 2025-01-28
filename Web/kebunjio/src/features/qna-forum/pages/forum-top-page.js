@@ -33,6 +33,7 @@ function ForumTopPage() {
     upvote: 50,
     comment: 12,
     hasLiked: true,
+    hasImage: true,
   },
   {
     id: 2,
@@ -44,6 +45,7 @@ function ForumTopPage() {
     upvote: 40,
     comment: 13,
     hasLiked: false,
+    hasImage: false,
   },
   {
     id: 3,
@@ -55,6 +57,7 @@ function ForumTopPage() {
     upvote: 30,
     comment: 14,
     hasLiked: true,
+    hasImage: true,
   }]
 
   return (
