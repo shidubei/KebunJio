@@ -99,11 +99,11 @@ function ForumNewPost() {
               />
             </Form.Group>
 
-            <div>
+            <div style={{marginTop:"16px"}}>
               <Button variant="secondary" type="reset" onClick={resetPost}>
                 Cancel
               </Button>
-              <Button variant="primary" type="submit">
+              <Button style={{marginLeft:"8px"}} variant="primary" type="submit">
                 Post
               </Button>
             </div>
