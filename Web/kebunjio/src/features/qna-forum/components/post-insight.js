@@ -5,8 +5,8 @@ import Col from "react-bootstrap/Col";
 
 const PostInsight = ({upvote, comment}) => {
     return(
-        <Container>
-            <Row>
+        <Container className="post-insight">
+            <Row xs="auto">
                 <Col>Upvote: {upvote}</Col>
                 <Col>Comment: {comment}</Col>
             </Row>

@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import PostHeader from "./post-header";
 import PostInsight from "./post-insight";
+import { Link } from "react-router-dom";
 
 //need to trim down the post length
 function trimContent(content) {
@@ -15,15 +16,21 @@ function trimContent(content) {
     }
 }
 
-const PostSneakPeak = ({post, onClick}) => {
+const PostSneakPeak = ({post, onClick}) => {    
     return(
-        <div onClick={onClick}>
+        <div className="post-sneak-peak-class">
             <Container>
                 <Row><PostHeader username={post.username} time={post.time}/></Row>
                 <Row>
-                    <b>{post.title}</b>
-                    <p>{post.tag}</p>
-                    <p>{trimContent(post.content)}</p>
+                    <Link to={`/forum/post/?id=${post.id}`} state={{ post: post }}>
+                        <b>{post.title}</b>
+                    </Link>                    
+                    <div>
+                        <span className="tag-class">{post.tag}</span>
+                    </div>
+                    <div>
+                        <p>{trimContent(post.content)}</p>
+                    </div>
                 </Row>
                 <Row><PostInsight upvote={post.upvote} comment={post.comment}/></Row>
             </Container>

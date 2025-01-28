@@ -6,12 +6,6 @@ import '../styling/forum-page.css'
 import { useNavigate } from "react-router-dom";
 
 function ForumTopPage() {
-  let navigate = useNavigate();
-
-  const routeChange = (post) =>{ 
-    navigate(`/forum/post/?id=${post.id}`, { state: { post } });
-  }
-
   /*TODO: implement call to API using the below useEffect */
   /* const [posts, setPosts] = useState([]) 
     useEffect(() => {
@@ -68,9 +62,9 @@ function ForumTopPage() {
             <MenuSidebar/>
         </div>
         <div className="main-content">
-        <p>My post:</p>
+        <p className="page-header">Top post</p>
             {posts.length!==0?(posts.map((post,index)=>(
-                <PostSneakPeak key={index} post={post} onClick={() => routeChange(post)}/>
+                <PostSneakPeak key={index} post={post}/>
             ))):(<p>No result</p>)}
         </div>
       </div>

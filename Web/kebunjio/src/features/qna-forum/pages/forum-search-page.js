@@ -101,10 +101,10 @@ function ForumSearchPage() {
             </Form>
           </div>
           <div>
-            <p>Search result:</p>
+            <p style={{marginTop:"10px", marginLeft:"8px"}}>Search result:</p>
             {search_results.length!==0?(search_results.map((post,index)=>(
                 <PostSneakPeak key={index} post={post} onClick={() => routeChange(post)}/>
-            ))):(<p>No result</p>)}
+            ))):(<p style={{marginTop:"10px", marginLeft:"8px"}}>No result</p>)}
           </div>
         </div>
       </div>

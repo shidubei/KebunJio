@@ -67,7 +67,7 @@ function ForumMyPage() {
             <MenuSidebar/>
         </div>
         <div className="main-content">
-        <p>My post:</p>
+        <p className="page-header">My post</p>
             {posts.length!==0?(posts.map((post,index)=>(
                 <PostSneakPeak key={index} post={post} onClick={() => routeChange(post)}/>
             ))):(<p>No result</p>)}
