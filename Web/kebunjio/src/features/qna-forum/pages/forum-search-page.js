@@ -24,7 +24,8 @@ function ForumSearchPage() {
      tag: "tag1",
      content: "Can anyone tell me what's wrong with my cabbage?",
      upvote: 50,
-     comment: 12
+     comment: 12,
+     hasLiked: true,
    },
    {
      id: 2,
@@ -34,7 +35,9 @@ function ForumSearchPage() {
      content: "Can anyone tell me what's wrong with my tomato?",
      tag: "tag2",
      upvote: 40,
-     comment: 13
+     comment: 13,
+     hasLiked: false,
+
    },
    {
      id: 3,
@@ -44,7 +47,8 @@ function ForumSearchPage() {
      content: "Can anyone tell me what's wrong with my spinach?",
      tag: "tag3",
      upvote: 30,
-     comment: 14
+     comment: 14,
+     hasLiked: true,
    }]
 
   const [searchInput, setSearchInput] = useState('');

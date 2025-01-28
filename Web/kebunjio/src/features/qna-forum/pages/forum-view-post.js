@@ -20,14 +20,18 @@ const Post = () =>{
         time: new Date("2025-01-30").toDateString(),
         content: "OK, cool",
         like: 12,
-        dislike: 3
+        dislike: 3,
+        hasLiked: false,
+        hasDisliked: true
     },
     {
         username: "Yasmine",
         time: new Date("2025-01-30").toDateString(),
         content: "OK, cool",
         like: 12,
-        dislike: 3
+        dislike: 3,
+        hasLiked: true,
+        hasDisliked: false
     }]
 
     const [replyInput, setReplyInput] = useState('')
@@ -36,14 +40,8 @@ const Post = () =>{
         setReplyInput(event.target.value)
     }
 
-    const handleUpvote = (event) => {
-        if (post) {
-            setPost({ ...post, upvote: (post.upvote || 0) + 1 });
-            /*TODO: Implement update to API */
-        }
-    }
-
     const handleSubmitReply = (event) => {
+        alert(replyInput)
         /*Implement API call here */
     }
 
@@ -73,7 +71,7 @@ const Post = () =>{
                         </Form.Group>
                         <div style={{marginTop:"16px"}}>
                             <Button style={{fontSize:"12px"}} variant="secondary" type="reset" onClick={handleClear}>Cancel</Button>
-                            <Button style={{fontSize:"12px", marginLeft:"8px"}} variant="primary" type="submit" onClick={handleUpvote}>Reply</Button>
+                            <Button style={{fontSize:"12px", marginLeft:"8px"}} variant="primary" onClick={handleSubmitReply}>Reply</Button>
                         </div>
                     </Form>
                 </div>

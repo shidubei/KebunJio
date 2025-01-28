@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import PostHeader from "./post-header";
@@ -21,7 +21,7 @@ const FullPost = ({post}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <PostInsight upvote={post.upvote} comment={post.comment}/>
+                            <PostInsight upvote={post.upvote} comment={post.comment} hasLiked={post.hasLiked}/>
                         </Col>
                     </Row>
 
