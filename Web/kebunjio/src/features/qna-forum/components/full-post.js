@@ -11,18 +11,17 @@ const FullPost = ({post}) => {
         <div>
             <div>
                 <Container>
-                    <Row><PostHeader/></Row>
+                    <Row><PostHeader username={post.username} time={post.time}/></Row>
                     <Row>
                         <b>{post.title}</b>
-                        <p>{post.tag}</p>
+                        <div>
+                            <span className="tag-class">{post.tag}</span>
+                        </div>
                         <p>{post.content}</p>
                     </Row>
                     <Row>
                         <Col>
                             <PostInsight upvote={post.upvote} comment={post.comment}/>
-                        </Col>
-                        <Col>
-                            <Button>Upvote</Button>
                         </Col>
                     </Row>
 

@@ -69,13 +69,15 @@ const Post = () =>{
                 <div>
                     <Form>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Control onChange={handleReplyInputChange} value={replyInput} type="textarea" placeholder="Write your reply here"/>
+                            <Form.Control className="text-area" onChange={handleReplyInputChange} value={replyInput} type="textarea" placeholder="Write your reply here"/>
                         </Form.Group>
-                        <Button onClick={handleClear}>Cancel</Button>
-                        <Button onClick={handleUpvote}>Reply</Button>
+                        <div style={{marginTop:"16px"}}>
+                            <Button style={{fontSize:"12px"}} variant="secondary" type="reset" onClick={handleClear}>Cancel</Button>
+                            <Button style={{fontSize:"12px", marginLeft:"8px"}} variant="primary" type="submit" onClick={handleUpvote}>Reply</Button>
+                        </div>
                     </Form>
                 </div>
-                <div>
+                <div style={{marginTop:"16px"}}>
                 {replies.length !== 0 ? (
                     replies.map((reply, index) => (
                         <Reply key={index} reply={reply} />

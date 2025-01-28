@@ -101,7 +101,7 @@ function ForumSearchPage() {
             </Form>
           </div>
           <div>
-            <p style={{marginTop:"10px", marginLeft:"8px"}}>Search result:</p>
+            <p style={{marginTop:"10px", marginLeft:"8px"}} className="page-header">Search result:</p>
             {search_results.length!==0?(search_results.map((post,index)=>(
                 <PostSneakPeak key={index} post={post} onClick={() => routeChange(post)}/>
             ))):(<p style={{marginTop:"10px", marginLeft:"8px"}}>No result</p>)}
