@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/plantSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,22 +46,81 @@
         app:layout_constraintBottom_toTopOf="@id/reminderTime"
         />
 
-    <Spinner
+    <TextView
         android:id="@+id/reminderTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:text="Select Time"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/reminderType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/reminderFrequency" />
 
-    <Spinner
+    <LinearLayout
         android:id="@+id/reminderFrequency"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/reminderTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rgIntervalType">
+
+        <!-- Number Picker for numeric frequency -->
+        <NumberPicker
+            android:id="@+id/frequencyNumberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Spinner for interval selection (Days/Weeks/Months) -->
+        <Spinner
+            android:id="@+id/frequencyIntervalPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rgIntervalType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@id/reminderFrequency"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/reminderFrequency">
+
+        <RadioButton
+            android:id="@+id/rbDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day" />
+
+        <RadioButton
+            android:id="@+id/rbWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week" />
+
+        <RadioButton
+            android:id="@+id/rbMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/rgIntervalType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
