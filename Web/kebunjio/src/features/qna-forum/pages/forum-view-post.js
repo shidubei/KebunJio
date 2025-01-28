@@ -10,9 +10,10 @@ import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
 import '../styling/forum-page.css'
 
-function Post(){
+const Post = () =>{
     const location = useLocation();
-    const { post } = location.state || {}; 
+    const initialPost = location.state?.post;
+    const [post, setPost] = useState(initialPost || null); 
 
     const replies = [{
         username: "Yasmine",
@@ -35,8 +36,23 @@ function Post(){
         setReplyInput(event.target.value)
     }
 
+    const handleUpvote = (event) => {
+        if (post) {
+            setPost({ ...post, upvote: (post.upvote || 0) + 1 });
+            /*TODO: Implement update to API */
+        }
+    }
+
+    const handleSubmitReply = (event) => {
+        /*Implement API call here */
+    }
+
+    const handleClear = (event) => {
+        setReplyInput("")
+    }
+
     if (!post) {
-        return <p>No post data available. Please navigate through the forum page.</p>;
+        return <p>No post data available</p>;
     }
 
     return(
@@ -53,10 +69,10 @@ function Post(){
                 <div>
                     <Form>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Control type="textarea" placeholder="Write your reply here" onChange={handleReplyInputChange}/>
+                            <Form.Control onChange={handleReplyInputChange} value={replyInput} type="textarea" placeholder="Write your reply here"/>
                         </Form.Group>
-                        <Button type="submit">Cancel</Button>
-                        <Button type="submit">Reply</Button>
+                        <Button onClick={handleClear}>Cancel</Button>
+                        <Button onClick={handleUpvote}>Reply</Button>
                     </Form>
                 </div>
                 <div>

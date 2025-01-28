@@ -12,6 +12,22 @@ function ForumMyPage() {
     navigate(`/forum/post/?id=${post.id}`, { state: { post } });
   }
 
+    /*TODO: implement call to API using the below useEffect */
+  /* const [posts, setPosts] = useState([]) 
+    useEffect(() => {
+        const fetchTopTenPost = async () => {
+            try{
+              const response = await fetch(api);
+              const data = await response.json();
+              setPosts(data.posts)
+            } catch (error) {
+              console.error("Error fetching top post", error)
+            }
+          }
+      })
+
+  */
+
   const posts = [{
     id: 1,
     username: "Kelly",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
 import PostSneakPeak from '../components/post-sneak-peek';
@@ -12,6 +12,23 @@ function ForumTopPage() {
     navigate(`/forum/post/?id=${post.id}`, { state: { post } });
   }
 
+  /*TODO: implement call to API using the below useEffect */
+  /* const [posts, setPosts] = useState([]) 
+    useEffect(() => {
+        const fetchTopTenPost = async () => {
+            try{
+              const response = await fetch(api);
+              const data = await response.json();
+              setPosts(data.posts)
+            } catch (error) {
+              console.error("Error fetching top post", error)
+            }
+          }
+      })
+
+  */
+
+    //dummy data for now
   const posts = [{
     id: 1,
     username: "Kelly",

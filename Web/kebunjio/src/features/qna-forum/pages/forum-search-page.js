@@ -8,11 +8,13 @@ import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
 
 function ForumSearchPage() {
- let navigate = useNavigate();
+  let navigate = useNavigate();
  
    const routeChange = (post) =>{ 
      navigate(`/forum/post/?id=${post.id}`, { state: { post } });
    }
+
+     /* const [posts, setPosts] = useState([]) */
  
    const search_results = [{
      id: 1,
@@ -51,8 +53,31 @@ function ForumSearchPage() {
       setSearchInput(event.target.value);
   };
 
+  /*TODO: implement with call to API*/
   const handleSearchSubmit = (event) => {
     console.log(searchInput)
+
+    /*For call to API function */
+    /* const strLength = getLength(searchInput)
+    if (strLength >= 2) {
+      try {
+        const response = await fetch(api);
+        const data = await response.json();
+        setPosts(data.books);
+      } catch (error) {
+        console.error('Error searching books:', error);
+      }
+    }
+    else{
+      alert("Please input more than two characters");
+    }
+    
+    */
+  }
+
+  function getCleanLength(str) {
+    var cleanStr = str.replace(/[^\w]/gi, '');
+    return cleanStr.length;
   }
 
   return (
