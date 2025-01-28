@@ -35,6 +35,7 @@ function EventPage() {
             </div>
         </div>
     );
+
 }
 
 export default EventPage;
