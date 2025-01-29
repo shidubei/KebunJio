@@ -10,6 +10,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+//Check if user exists
+    public boolean isUserExists(String email, String username) {
+        return userRepository.findByEmail(email) != null || userRepository.findByUsername(username) != null;
+    }
 
     public User registerUser(User user) {
         try {
