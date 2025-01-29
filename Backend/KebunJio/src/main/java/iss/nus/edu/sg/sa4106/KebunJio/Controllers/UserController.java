@@ -8,27 +8,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-//Login
     @GetMapping("/login")
-    public String showLoginPage(){
+    public String showLoginPage() {
         return "login";
     }
 
+
     @PostMapping("/login")
-    public String login(@RequestParam String emailOrUsername, @RequestParam String password, HttpSession session,Model model) {
+    public String login(@RequestParam String emailOrUsername,
+                        @RequestParam String password,
+                        HttpSession session,
+                        Model model) {
         try {
             User user = userService.loginUser(emailOrUsername, password);
+            if(emailOrUsername=="Admin"&&password=="admin"){
+                return "redirect:/dashboard";
+            }
             session.setAttribute("loggedInUser", user);
-            return "redirect:/dashboard";
-        }catch (Exception e){
-            model.addAttribute("error",e.getMessage());
+            return "redirect:/userProfile";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
             return "login";
         }
     }
@@ -36,19 +41,21 @@ public class UserController {
     @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "Logout successful!";
+        return "redirect:/login";
     }
 
     @GetMapping("/current")
+    @ResponseBody
     public User getCurrentUser(HttpSession session) {
         return (User) session.getAttribute("loggedInUser");
     }
 
-    //Register
+
     @GetMapping("/register")
     public String showRegisterPage() {
-        return "register";  // 渲染 `register.html`
+        return "register";
     }
+
 
     @PostMapping("/process-register")
     public String processRegister(
@@ -59,7 +66,7 @@ public class UserController {
             Model model) {
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match!");
-            return "register"; // 返回注册页面并显示错误信息
+            return "register";
         }
         try {
             User newUser = new User();
@@ -70,11 +77,10 @@ public class UserController {
             userService.registerUser(newUser);
 
             model.addAttribute("success", "Registration successful! Please login.");
-            return "login"; // 注册成功后跳转到登录页面
+            return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "register";
         }
     }
 }
-
