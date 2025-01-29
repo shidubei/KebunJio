@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "iss.nus.edu.sg.sa4106.kebunjio"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
