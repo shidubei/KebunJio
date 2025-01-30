@@ -66,7 +66,7 @@ public class UserController {
             Model model) {
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match!");
-            return "register";
+            return "redirect:/register";
         }
         try {
             User newUser = new User();
@@ -80,7 +80,7 @@ public class UserController {
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "register";
+            return "redirect:/register";
         }
     }
 }
