@@ -13,7 +13,7 @@ const FullPost = ({post}) => {
         <div>
             <div>
                 <Container>
-                    <Row><PostHeader username={post.username} time={post.time}/></Row>
+                    <Row><PostHeader post={post}/></Row>
                     <Row>
                         <b>{post.title}</b>
                         <div>

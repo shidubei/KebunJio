@@ -1,7 +1,7 @@
 .page-container {
     display: flex;
     flex-direction: row;
-    height: 100vh;          
+    height: 100vh;   
   }
 
 .menu-sidebar{
@@ -108,4 +108,10 @@
     max-width:500px;
     margin-top: 16px;
     margin-bottom: 16px;
+}
+
+.three-dot{
+    background-color: white;
+    color: #333;
+    border-color: white;
 }

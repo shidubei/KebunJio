@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState}  from 'react';
 import Appbar from '../../../components/Appbar'
 import MenuSidebar from '../components/menu-sidebar'
 import PostSneakPeak from '../components/post-sneak-peek';
@@ -36,6 +36,9 @@ function ForumTopPage() {
             {posts.length!==0?(posts.map((post,index)=>(
                 <PostSneakPeak key={index} post={post}/>
             ))):(<p>No result</p>)}
+            {
+              
+            }
         </div>
       </div>
     </div>

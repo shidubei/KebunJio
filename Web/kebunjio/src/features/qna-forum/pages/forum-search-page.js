@@ -6,53 +6,16 @@ import PostSneakPeak from '../components/post-sneak-peek';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
+import data from '../dummy-data/post.json'
 
 function ForumSearchPage() {
   let navigate = useNavigate();
  
-   const routeChange = (post) =>{ 
+  const routeChange = (post) =>{ 
      navigate(`/forum/post/?id=${post.id}`, { state: { post } });
    }
 
-     /* const [posts, setPosts] = useState([]) */
- 
-     //dummy data for now
-     const search_results = [{
-      id: 1,
-      username: "Kelly",
-      time: new Date("2025-01-27").toDateString(),
-      title: "What is wrong with my cabbage",
-      tag: "tag1",
-      content: "Can anyone tell me what's wrong with my cabbage?",
-      upvote: 50,
-      comment: 12,
-      hasLiked: true,
-      hasImage: true,
-    },
-    {
-      id: 2,
-      username: "Yasmine",
-      time: new Date("2025-01-28").toDateString(),
-      title: "What is wrong with my tomato",
-      content: "Can anyone tell me what's wrong with my tomato?",
-      tag: "tag2",
-      upvote: 40,
-      comment: 13,
-      hasLiked: false,
-      hasImage: false,
-    },
-    {
-      id: 3,
-      username: "KY",
-      time: new Date("2025-01-29").toDateString(),
-      title: "What is wrong with my spinach",
-      content: "Can anyone tell me what's wrong with my spinach?",
-      tag: "tag3",
-      upvote: 30,
-      comment: 14,
-      hasLiked: true,
-      hasImage: true,
-    }]
+  const [search_results, setSearchResults] = useState(data)
 
   const [searchInput, setSearchInput] = useState('');
 
