@@ -25,13 +25,24 @@ public class UserController {
                         @RequestParam String password,
                         HttpSession session,
                         Model model) {
+
         try {
-            User user = userService.loginUser(emailOrUsername, password);
-            if(emailOrUsername=="Admin"&&password=="admin"){
+            if (emailOrUsername.equals("Admin") && password.equals("admin")) {
+                User adminUser = new User();
+                adminUser.setUsername("Admin");
+                adminUser.setEmail("admin@example.com");
+                session.setAttribute("loggedInUser", adminUser);
                 return "redirect:/dashboard";
             }
+            User user = userService.loginUser(emailOrUsername, password);
+            if (user == null) {
+                model.addAttribute("error", "Invalid username or password!");
+                return "redirect:/userProfile";
+            }
+
             session.setAttribute("loggedInUser", user);
             return "redirect:/userProfile";
+
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "login";
@@ -66,7 +77,7 @@ public class UserController {
             Model model) {
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match!");
-            return "redirect:/register";
+            return "register";
         }
         try {
             User newUser = new User();
@@ -80,7 +91,7 @@ public class UserController {
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "redirect:/register";
+            return "register";
         }
     }
 }

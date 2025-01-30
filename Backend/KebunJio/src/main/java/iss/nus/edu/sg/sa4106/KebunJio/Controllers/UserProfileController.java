@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping("/userProfile")
 public class UserProfileController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class UserProfileController {
         model.addAttribute("uniquePlantTypes", uniquePlantTypes);
         model.addAttribute("plantHistory", history);
 
-        return "profile";
+        return "userProfile";
     }
 
     @PostMapping("/update")
@@ -59,6 +59,6 @@ public class UserProfileController {
         session.setAttribute("loggedInUser", updatedUser);
 
         model.addAttribute("success", "Profile updated successfully!");
-        return "redirect:/profile";
+        return "redirect:/userProfile";
     }
 }

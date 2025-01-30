@@ -1,26 +1,31 @@
 package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Users")
 public class User {
 	@Id
-	private int userId;
+	private String userId;
 
+	@Indexed(unique = true)
 	private String username;
+
+	@Indexed(unique = true)
 	private String email;
+
 	private String phoneNumber;
 	private boolean isAdmin;
 	private String password;
 
 	public User() {}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
