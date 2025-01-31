@@ -20,7 +20,7 @@ public class UserService {
 
     public User registerUser(User user) {
         try {
-            user.setUserId(null);
+            user.setId(null);
 
             if (userRepository.findByUsername(user.getUsername()) != null ||
                     userRepository.findByEmail(user.getEmail()) != null) {
