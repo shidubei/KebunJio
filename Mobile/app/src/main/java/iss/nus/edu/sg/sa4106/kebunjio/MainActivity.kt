@@ -9,6 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import iss.nus.edu.sg.sa4106.kebunjio.data.Reminder
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityMainBinding
 import iss.nus.edu.sg.sa4106.kebunjio.features.addplant.AddPlantActivity
+import iss.nus.edu.sg.sa4106.kebunjio.features.logactivities.LogActivitiesActivity
+import iss.nus.edu.sg.sa4106.kebunjio.features.planthealthcheck.PlantHealthCheckActivity
 import iss.nus.edu.sg.sa4106.kebunjio.features.reminders.ReminderActivity
 import iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails.ViewPlantDetailsActivity
 import iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails.ChoosePlantToViewActivity
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun startActivity() {
         //val intent = Intent(this, ReminderActivity::class.java)
-        val intent = Intent(this, AddPlantActivity::class.java)
+        val intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
 
     }
