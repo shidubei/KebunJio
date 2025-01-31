@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface EventRepository extends MongoRepository<Event, String> {
-    Optional<Event> findByEventId(int eventId);
-    void deleteByEventId(int eventId);
+    Optional<Event> findByEventId(String eventId);
+    void deleteByEventId(String eventId);
 }

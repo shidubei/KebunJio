@@ -19,9 +19,10 @@ public class EventController {
     public List<Event> getAllEvents() {
         return eventService.findAll();
     }
-
+    
+    //Change the id to String
     @GetMapping("/{eventId}")
-    public ResponseEntity<Event> getEventById(@PathVariable int eventId) {
+    public ResponseEntity<Event> getEventById(@PathVariable String eventId) {
         try {
             Event event = eventService.findByEventId(eventId);
             return ResponseEntity.ok(event);
@@ -29,14 +30,18 @@ public class EventController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    
+    // Have some little question
+    // Which data we need to transfer?
+    // do we need return event info?
+    
     @PostMapping
     public Event createEvent(@RequestBody Event event) {
         return eventService.save(event);
     }
 
     @PutMapping("/{eventId}")
-    public ResponseEntity<Event> updateEvent(@PathVariable int eventId, @RequestBody Event event) {
+    public ResponseEntity<Event> updateEvent(@PathVariable String eventId, @RequestBody Event event) {
         try {
             Event existingEvent = eventService.findByEventId(eventId);
             event.setId(existingEvent.getId());

@@ -12,7 +12,7 @@ public class Event {
 
 	@Id
 	private String id;
-	private int eventId;
+//	private int eventId;
 	private String name;
 	private String location;
 	private LocalDateTime startDateTime;
@@ -22,7 +22,7 @@ public class Event {
 
 	public Event() {}
 
-	public Event(String id, int eventId, String name, String location,
+	public Event(String id, int eventId,String name, String location,
 				 LocalDateTime startDateTime, LocalDateTime endDateTime,
 				 String description, String picture) {
 		this.id = id;

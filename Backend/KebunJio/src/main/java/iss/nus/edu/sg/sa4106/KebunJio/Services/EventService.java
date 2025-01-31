@@ -19,8 +19,8 @@ public class EventService {
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
-
-    public Event findByEventId(int eventId) {
+    // Change the Id to String
+    public Event findByEventId(String eventId) {
         return eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
     }
@@ -29,7 +29,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public void deleteByEventId(int eventId) {
+    public void deleteByEventId(String eventId) {
         eventRepository.deleteByEventId(eventId);
     }
 
