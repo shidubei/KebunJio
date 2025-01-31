@@ -10,7 +10,7 @@ import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-class MlModelService : Service() {
+open class MlModelService : Service() {
 
     inner class LocalBinder: Binder(){
         fun getService(): MlModelService{
