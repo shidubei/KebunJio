@@ -32,6 +32,7 @@ import java.io.ByteArrayOutputStream
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import iss.nus.edu.sg.sa4106.kebunjio.service.mlModel.MlModelService
 
 
 class AddPlantActivity : AppCompatActivity() {
@@ -139,7 +140,6 @@ class AddPlantActivity : AppCompatActivity() {
         }
 
         // bind service
-        //bound to service
         val intent = Intent(this@AddPlantActivity, MlModelService::class.java)
         bindService(intent, conn, Context.BIND_AUTO_CREATE)
 
