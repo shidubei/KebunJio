@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Users")
 public class User {
 	@Id
-	private String userId;
+
+	private String id;
 
 	@Indexed(unique = true)
 	private String username;
@@ -21,12 +22,13 @@ public class User {
 
 	public User() {}
 
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
+
 	}
 
 	public String getUsername() {
