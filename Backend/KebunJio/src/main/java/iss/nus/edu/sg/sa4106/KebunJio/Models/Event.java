@@ -3,27 +3,37 @@ package iss.nus.edu.sg.sa4106.KebunJio.Models;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Objects;
+import java.util.Date;
 
 @Document(collection = "events")
 public class Event {
 
 	@Id
-	private String id;  // MongoDB的标准ID类型
+	private String id;
 	private int eventId;
 	private String name;
 	private String location;
-	private LocalDateTime StartDateTime;
-	private LocalDateTime EndDateTime;
+	private LocalDateTime startDateTime;
+	private LocalDateTime endDateTime;
 	private String description;
-	private String Picture;
-	private String eventType;
-	private String status;
-	private String organizer;
-	private int maxParticipants;
-
+	private String picture;
 
 	public Event() {}
 
+	public Event(String id, int eventId, String name, String location,
+				 LocalDateTime startDateTime, LocalDateTime endDateTime,
+				 String description, String picture) {
+		this.id = id;
+		this.eventId = eventId;
+		this.name = name;
+		this.location = location;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+		this.description = description;
+		this.picture = picture;
+	}
 
 	public String getId() {
 		return id;
@@ -58,19 +68,19 @@ public class Event {
 	}
 
 	public LocalDateTime getStartDateTime() {
-		return StartDateTime;
+		return startDateTime;
 	}
 
 	public void setStartDateTime(LocalDateTime startDateTime) {
-		StartDateTime = startDateTime;
+		this.startDateTime = startDateTime;
 	}
 
 	public LocalDateTime getEndDateTime() {
-		return EndDateTime;
+		return endDateTime;
 	}
 
 	public void setEndDateTime(LocalDateTime endDateTime) {
-		EndDateTime = endDateTime;
+		this.endDateTime = endDateTime;
 	}
 
 	public String getDescription() {
@@ -82,43 +92,66 @@ public class Event {
 	}
 
 	public String getPicture() {
-		return Picture;
+		return picture;
 	}
 
 	public void setPicture(String picture) {
-		Picture = picture;
+		this.picture = picture;
 	}
 
-	// 新增字段的 getters 和 setters
-	public String getEventType() {
-		return eventType;
+	public com.google.api.services.calendar.model.Event toGoogleCalendarEvent() {
+		com.google.api.services.calendar.model.Event googleEvent = new com.google.api.services.calendar.model.Event()
+				.setSummary(this.name)
+				.setDescription(this.description)
+				.setLocation(this.location);
+
+		// Convert LocalDateTime to Date
+		Date startDate = Date.from(this.startDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(this.endDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+		com.google.api.services.calendar.model.EventDateTime start = new com.google.api.services.calendar.model.EventDateTime()
+				.setDateTime(new com.google.api.client.util.DateTime(startDate));
+
+		com.google.api.services.calendar.model.EventDateTime end = new com.google.api.services.calendar.model.EventDateTime()
+				.setDateTime(new com.google.api.client.util.DateTime(endDate));
+
+		googleEvent.setStart(start);
+		googleEvent.setEnd(end);
+
+		return googleEvent;
 	}
 
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Event event = (Event) o;
+		return eventId == event.eventId &&
+				Objects.equals(id, event.id) &&
+				Objects.equals(name, event.name) &&
+				Objects.equals(location, event.location) &&
+				Objects.equals(startDateTime, event.startDateTime) &&
+				Objects.equals(endDateTime, event.endDateTime) &&
+				Objects.equals(description, event.description) &&
+				Objects.equals(picture, event.picture);
 	}
 
-	public String getStatus() {
-		return status;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, eventId, name, location, startDateTime, endDateTime, description, picture);
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getOrganizer() {
-		return organizer;
-	}
-
-	public void setOrganizer(String organizer) {
-		this.organizer = organizer;
-	}
-
-	public int getMaxParticipants() {
-		return maxParticipants;
-	}
-
-	public void setMaxParticipants(int maxParticipants) {
-		this.maxParticipants = maxParticipants;
+	@Override
+	public String toString() {
+		return "Event{" +
+				"id='" + id + '\'' +
+				", eventId=" + eventId +
+				", name='" + name + '\'' +
+				", location='" + location + '\'' +
+				", startDateTime=" + startDateTime +
+				", endDateTime=" + endDateTime +
+				", description='" + description + '\'' +
+				", picture='" + picture + '\'' +
+				'}';
 	}
 }

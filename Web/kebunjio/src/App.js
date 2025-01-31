@@ -24,7 +24,6 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/events" element={<EventPage />} />
           <Route path="/events/:id" element={<EventDetail />} />
-          <Route path="/forum" element={<ForumPage/>} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/forum" element={<ForumTopPage/>} />
           <Route path="/forum/search" element={<ForumSearchPage/>} />
@@ -35,7 +34,7 @@ function App() {
           <Route path="/forum/:id/edit" element={<ForumEditPost />} />
         </Routes>
       </BrowserRouter>
-  );
+);
 }
 
 export default App;

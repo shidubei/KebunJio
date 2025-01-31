@@ -5,11 +5,10 @@ import iss.nus.edu.sg.sa4106.KebunJio.Services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/events")
+@RequestMapping("/events")
 @CrossOrigin(origins = "*")
 public class EventController {
 
@@ -21,11 +20,14 @@ public class EventController {
         return eventService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
-        return eventService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{eventId}")
+    public ResponseEntity<Event> getEventById(@PathVariable int eventId) {
+        try {
+            Event event = eventService.findByEventId(eventId);
+            return ResponseEntity.ok(event);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
@@ -33,21 +35,26 @@ public class EventController {
         return eventService.save(event);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        if (!eventService.findById(id).isPresent()) {
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Event> updateEvent(@PathVariable int eventId, @RequestBody Event event) {
+        try {
+            Event existingEvent = eventService.findByEventId(eventId);
+            event.setId(existingEvent.getId());
+            event.setEventId(eventId);
+            return ResponseEntity.ok(eventService.save(event));
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
-        event.setId(id);
-        return ResponseEntity.ok(eventService.save(event));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEvent(@PathVariable Long id) {
-        if (!eventService.findById(id).isPresent()) {
+    @DeleteMapping("/{eventId}")
+    public ResponseEntity<?> deleteEvent(@PathVariable int eventId) {
+        try {
+            eventService.findByEventId(eventId);
+            eventService.deleteByEventId(eventId);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
-        eventService.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }
