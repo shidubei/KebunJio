@@ -13,6 +13,7 @@ import UserProfilePage from './features/user-profile/user-profile-page';
 import ViewPost from './features/qna-forum/pages/forum-view-post'
 import LoginPage from './features/login-signup/login';
 import SignUpPage from './features/login-signup/signup';
+import ForumEditPost from './features/qna-forum/pages/forum-edit-post';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/forum/my" element={<ForumMyPage/>} /> 
           <Route path="/forum/post" element={<ViewPost/>} /> 
           <Route path="/user-profile" element={<UserProfilePage/>} />
+          <Route path="/forum/:id/edit" element={<ForumEditPost />} />
         </Routes>
       </BrowserRouter>
   );
