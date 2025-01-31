@@ -23,9 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         startActivity()
 
+    }
     private fun startActivity() {
         //val intent = Intent(this, ReminderActivity::class.java)
-        val intent = Intent(this, ChoosePlantToViewActivity::class.java)
+        val intent = Intent(this, AddPlantActivity::class.java)
         startActivity(intent)
 
     }
