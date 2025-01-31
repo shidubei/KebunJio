@@ -3,8 +3,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DashboardPage from './features/dashboard/dashboard-page';
 import { EventPage, EventDetail } from './features/event';
-import ForumPage from './features/qna-forum/forum-page';
-import EventPage from './features/event/event-page';
 import ForumTopPage from './features/qna-forum/pages/forum-top-page';
 import ForumMyPage from './features/qna-forum/pages/forum-my-post';
 import ForumNewPost from './features/qna-forum/pages/forum-new-post';
