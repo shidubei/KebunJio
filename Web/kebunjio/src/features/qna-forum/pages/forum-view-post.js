@@ -16,7 +16,7 @@ const Post = () =>{
     const [post, setPost] = useState(initialPost || null); 
 
     const replies = [{
-        username: "Yasmine",
+        username: "Kelly",
         time: new Date("2025-01-30").toDateString(),
         content: "OK, cool",
         like: 12,
@@ -78,7 +78,7 @@ const Post = () =>{
                 <div style={{marginTop:"16px"}}>
                 {replies.length !== 0 ? (
                     replies.map((reply, index) => (
-                        <Reply key={index} reply={reply} />
+                        <Reply key={index} userReply={reply} />
                     ))
                 ) : (
                     <p>No replies yet</p>
