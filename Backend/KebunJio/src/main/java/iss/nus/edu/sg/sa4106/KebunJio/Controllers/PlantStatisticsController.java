@@ -1,7 +1,7 @@
-package com.plant.controller;
+package iss.nus.edu.sg.sa4106.KebunJio.Controllers;
 
-import com.plant.entity.PlantStatistics;
-import com.plant.service.PlantStatisticsService;
+import iss.nus.edu.sg.sa4106.KebunJio.Models.PlantStatistics;
+import iss.nus.edu.sg.sa4106.KebunJio.Services.PlantStatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

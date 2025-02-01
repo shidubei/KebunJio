@@ -12,7 +12,7 @@ public class Event {
 
 	@Id
 	private String id;
-//	private int eventId;
+	private String eventId; // Was previously annotated out. Un-annotated for running.
 	private String name;
 	private String location;
 	private LocalDateTime startDateTime;
@@ -22,7 +22,7 @@ public class Event {
 
 	public Event() {}
 
-	public Event(String id, int eventId,String name, String location,
+	public Event(String id, String eventId,String name, String location,
 				 LocalDateTime startDateTime, LocalDateTime endDateTime,
 				 String description, String picture) {
 		this.id = id;
@@ -43,11 +43,11 @@ public class Event {
 		this.id = id;
 	}
 
-	public int getEventId() {
+	public String getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(int eventId) {
+	public void setEventId(String eventId) {
 		this.eventId = eventId;
 	}
 

@@ -1,6 +1,6 @@
-package com.plant.entity;
+package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
-import lombok.Data;
+import lombok.Data; // need to ask what lombok is and how to install
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonFormat;

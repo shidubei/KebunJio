@@ -1,4 +1,4 @@
-package com.plant.dto;
+package iss.nus.edu.sg.sa4106.KebunJio.DAO;
 
 import lombok.Data;
 import javax.validation.constraints.NotBlank;
