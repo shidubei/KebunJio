@@ -1,9 +1,11 @@
-package com.plant.dto;
+package iss.nus.edu.sg.sa4106.KebunJio.DAO;
 
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import jakarta.validation.constraints.Size;
 
 @Data
 public class EventDTO {

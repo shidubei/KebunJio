@@ -1,4 +1,4 @@
-package com.plant.controller;
+package iss.nus.edu.sg.sa4106.KebunJio.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/dashboard")
+@RequestMapping("/Dashboard")
 public class DashboardController {
 
     @GetMapping("/statistics")

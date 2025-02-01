@@ -1,12 +1,10 @@
-package com.plant.entity;
+package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
-@Data
 @Document(collection = "events")
 public class EventAdmin {
     @Id
