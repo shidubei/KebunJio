@@ -32,7 +32,6 @@ import java.io.ByteArrayOutputStream
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
-import iss.nus.edu.sg.sa4106.kebunjio.service.mlModel.MlModelService
 
 
 class AddPlantActivity : AppCompatActivity() {
