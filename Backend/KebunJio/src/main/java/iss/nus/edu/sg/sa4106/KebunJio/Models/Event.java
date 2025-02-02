@@ -12,7 +12,7 @@ public class Event {
 
 	@Id
 	private String id;
-	private String eventId; // Was previously annotated out. Un-annotated for running.
+	private int eventId;
 	private String name;
 	private String location;
 	private LocalDateTime startDateTime;
@@ -26,7 +26,6 @@ public class Event {
 				 LocalDateTime startDateTime, LocalDateTime endDateTime,
 				 String description, String picture) {
 		this.id = id;
-		this.eventId = eventId;
 		this.name = name;
 		this.location = location;
 		this.startDateTime = startDateTime;
@@ -41,14 +40,6 @@ public class Event {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(String eventId) {
-		this.eventId = eventId;
 	}
 
 	public String getName() {
@@ -126,7 +117,7 @@ public class Event {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Event event = (Event) o;
-		return eventId == event.eventId &&
+		return 
 				Objects.equals(id, event.id) &&
 				Objects.equals(name, event.name) &&
 				Objects.equals(location, event.location) &&
@@ -138,14 +129,13 @@ public class Event {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, eventId, name, location, startDateTime, endDateTime, description, picture);
+		return Objects.hash(id, name, location, startDateTime, endDateTime, description, picture);
 	}
 
 	@Override
 	public String toString() {
 		return "Event{" +
 				"id='" + id + '\'' +
-				", eventId=" + eventId +
 				", name='" + name + '\'' +
 				", location='" + location + '\'' +
 				", startDateTime=" + startDateTime +

@@ -1,9 +1,10 @@
 package iss.nus.edu.sg.sa4106.KebunJio.Services;
 
+import org.springframework.stereotype.Service;
+
 import iss.nus.edu.sg.sa4106.KebunJio.Models.PlantStatistics;
 import iss.nus.edu.sg.sa4106.KebunJio.Repository.PlantStatisticsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
