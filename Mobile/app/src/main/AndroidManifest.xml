@@ -17,11 +17,23 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KebunJio"
         tools:targetApi="31">
-
+        <service
+            android:name=".service.mlModel.mlModelDiagnoseService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".service.mlModel.MlModelService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.DownloadImageService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".features.logactivities.LogActivitiesActivity"
@@ -31,6 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".features.viewplantdetails.ViewPlantDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.viewplantdetails.ChoosePlantToViewActivity"
             android:exported="false" />
         <activity
             android:name=".features.browseguides.BrowseGuidesActivity"
@@ -44,9 +59,7 @@
         <activity
             android:name=".features.addplant.AddPlantActivity"
             android:exported="false" />
-        <activity android:name=".features.reminders.ReminderActivity">
-        </activity>
-
+        <activity android:name=".features.reminders.ReminderActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
