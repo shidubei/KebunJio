@@ -38,6 +38,9 @@ import java.net.URL
 class AddPlantActivity : AppCompatActivity() {
 
     // for the UI
+    private var updatePlantId: Int? = null
+    private var updateUserId: Int = 0
+
     private var _binding: ActivityAddPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var nameEditText: EditText
@@ -58,11 +61,13 @@ class AddPlantActivity : AppCompatActivity() {
     lateinit var changeHarvestDateBtn: Button
     lateinit var changeHarvestTimeBtn: Button
 
-    lateinit var plantHealthText: TextView
-    lateinit var diseaseText: TextView
+    lateinit var plantHealthText: EditText
+    lateinit var diseaseText: EditText
     lateinit var harvestedSpinner: Spinner
 
     private var dummyData: DummyData = DummyData()
+
+    lateinit var harvestSpinnerOptions: MutableList<String>
 
     // services
     //variables for service, set bound to false
@@ -185,12 +190,42 @@ class AddPlantActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // if updating
+        updateUserId = intent.getIntExtra("userId",-1)
+        if (intent.getBooleanExtra("update",false)) {
+            binding.titlePart.text = "Edit Plant"
+            val plantId = intent.getIntExtra("plantId",-1)
+            val chosenPlant = dummyData.PlantDummy[plantId]
+            setData(chosenPlant)
+        }
+    }
+
+    public fun setData(plant: Plant) {
+        updatePlantId = plant.plantId
+        speciesSpinner.setSelection(plant.ediblePlantSpeciesId)
+        updateUserId = plant.userId
+        nameEditText.setText(plant.name)
+        diseaseText.setText(plant.disease)
+        plantDateTimeText.text = plant.plantedDate
+        harvestDateTimeText.text = plant.harvestStartDate
+        plantHealthText.setText(plant.plantHealth)
+        if (plant.harvested) {
+            harvestedSpinner.setSelection(harvestSpinnerOptions.indexOf("Harvested"))
+        } else {
+            harvestedSpinner.setSelection(harvestSpinnerOptions.indexOf("Not Harvested"))
+        }
+
+
     }
 
     private fun addNewPlant() {
-        val plantId = -1 // Must assign a proper id later
+        var plantId = -1 // Must assign a proper id later
+        if (updatePlantId != null) {
+            plantId = updatePlantId!!
+        }
         val ediblePlantSpeciesId = speciesSpinner.selectedItemPosition // must assign a proper id later
-        val userId = -1 // must assign a proper id later
+        val userId = updateUserId // must assign a proper id later
         val name = nameEditText.text.toString()
         val disease = diseaseText.text.toString()
         val plantedDate = plantDateTimeText.text.toString()

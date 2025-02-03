@@ -66,6 +66,7 @@ class ChooseLogToViewActivity : AppCompatActivity() {
 
         addFAB.setOnClickListener {
             val intent = Intent(this,LogActivitiesActivity::class.java)
+            intent.putExtra("userId",userId)
             this.startActivity(intent)
         }
 

@@ -20,6 +20,7 @@ import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.data.ActivityLog
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ViewActLogToChooseBinding
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ViewPlantToChooseBinding
+import iss.nus.edu.sg.sa4106.kebunjio.features.addplant.AddPlantActivity
 import iss.nus.edu.sg.sa4106.kebunjio.service.DownloadImageService
 import java.io.File
 
@@ -69,6 +70,7 @@ class LogToChooseAdapter(private val context: Context,
         val activityTypeText = binding.activityTypeText
         val lastTimeText = binding.lastTimeText
         val viewLogBtn = binding.viewLogBtn
+        val editLogBtn = binding.editLogBtn
         val deleteLogBtn = binding.deleteLogBtn
 
         if (plantId != null) {
@@ -91,6 +93,14 @@ class LogToChooseAdapter(private val context: Context,
             //val intent = Intent(getContext(), ViewPlantDetailsActivity::class.java)
             //intent.putExtra("plantId", positionId)
             //getContext().startActivity(intent)
+        }
+
+        editLogBtn.setOnClickListener{
+            val thisId = positionId
+            val intent = Intent(getContext(), AddPlantActivity::class.java)
+            intent.putExtra("update", true)
+            intent.putExtra("logId", thisId)
+            getContext().startActivity(intent)
         }
 
         //showSpeciesImg.setOnClickListener {

@@ -58,6 +58,7 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
 
         addFAB.setOnClickListener {
             val intent = Intent(this,AddPlantActivity::class.java)
+            intent.putExtra("userId",userId)
             this.startActivity(intent)
         }
 

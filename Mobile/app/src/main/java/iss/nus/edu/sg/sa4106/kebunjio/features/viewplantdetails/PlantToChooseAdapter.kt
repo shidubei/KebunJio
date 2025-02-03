@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.registerReceiver
 import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ViewPlantToChooseBinding
+import iss.nus.edu.sg.sa4106.kebunjio.features.addplant.AddPlantActivity
 import iss.nus.edu.sg.sa4106.kebunjio.service.DownloadImageService
 import java.io.File
 
@@ -95,6 +96,7 @@ class PlantToChooseAdapter(private val context: Context,
         //Log.d("ChoosePlantAdapter","ImgArray Size: ${showSpeciesImgArray.size}")
         val showPlantName = binding.plantNameChooseText
         val viewPlantBtn = binding.viewPlantBtn
+        val editPlantBtn = binding.editPlantBtn
         val deletePlantBtn = binding.deletePlantBtn
         Log.d("ChoosePlantAdapter","Position ${position}'s TextView: ${showPlantName}")
 
@@ -111,6 +113,14 @@ class PlantToChooseAdapter(private val context: Context,
         viewPlantBtn.setOnClickListener{
             val thisId = this.storedPlantId[position]
             val intent = Intent(getContext(), ViewPlantDetailsActivity::class.java)
+            intent.putExtra("plantId", thisId)
+            getContext().startActivity(intent)
+        }
+
+        editPlantBtn.setOnClickListener{
+            val thisId = this.storedPlantId[position]
+            val intent = Intent(getContext(), AddPlantActivity::class.java)
+            intent.putExtra("update", true)
             intent.putExtra("plantId", thisId)
             getContext().startActivity(intent)
         }
