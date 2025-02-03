@@ -32,7 +32,7 @@ public class PlantController {
 	}
 	
 	@GetMapping("/{plantId}")
-	public ResponseEntity<Plant> getPlant(@PathVariable int plantId) {
+	public ResponseEntity<Plant> getPlant(@PathVariable String plantId) {
         try {
             Optional<Plant> existingPlant = plantService.getPlant(plantId);
             if (existingPlant.isPresent()) {
@@ -60,7 +60,7 @@ public class PlantController {
 	}
 	
 	@PutMapping("/{plantId}")
-	public ResponseEntity<Plant> updatePlant(@PathVariable int plantId, @RequestBody Plant plant) {
+	public ResponseEntity<Plant> updatePlant(@PathVariable String plantId, @RequestBody Plant plant) {
 		try {
 			Optional<Plant> existingPlant = plantService.getPlant(plantId);
             if (existingPlant.isPresent()) {
@@ -79,7 +79,7 @@ public class PlantController {
 	
 	
 	@DeleteMapping("/{plantId}")
-	public ResponseEntity<?> deletePlant(@PathVariable int plantId) {
+	public ResponseEntity<?> deletePlant(@PathVariable String plantId) {
 		try {
 			if (plantService.deletePlant(plantId)) {
 				return ResponseEntity.ok().build();

@@ -11,7 +11,7 @@ import iss.nus.edu.sg.sa4106.KebunJio.Models.Plant;
 
 public interface PlantRepository extends MongoRepository<Plant,String> {
 	@Query("{'plantId': ?0}")
-	Optional<Plant> findByPlantId(int plantId);
+	Optional<Plant> findById(String plantId);
 	//@Query("SELECT p FROM Plant p JOIN p.user u WHERE u.id = :userId")
 	@Query("{'userId': ?0}")
 	List<Plant> findByUserId(@Param("userId") String userId);

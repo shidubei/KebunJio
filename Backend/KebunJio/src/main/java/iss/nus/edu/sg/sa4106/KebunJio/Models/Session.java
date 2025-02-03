@@ -2,9 +2,12 @@ package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
+
 public class Session {
 
-	private int sessionId;
+	@Id
+	private String id;
 	private User user;
 	private LocalDateTime startDateTime;
 	private LocalDateTime lastActionDateTime;
@@ -12,12 +15,12 @@ public class Session {
 	
 	public Session() {}
 
-	public int getSessionId() {
-		return sessionId;
+	public String getId() {
+		return id;
 	}
 
-	public void setSessionId(int sessionId) {
-		this.sessionId = sessionId;
+	public void setSessionId(String id) {
+		this.id = id;
 	}
 
 	public User getUser() {

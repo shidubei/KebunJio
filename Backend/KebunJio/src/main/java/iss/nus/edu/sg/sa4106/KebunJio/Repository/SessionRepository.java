@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface SessionRepository extends MongoRepository<Session, String> {
-	@Query("{'sessionId': ?0}")
-	Optional<Session> findBySessionId(int sessionId);
+	@Query("{'id': ?0}")
+	Optional<Session> findById(String id);
     //@Query("SELECT s, u FROM Session s JOIN s.user u WHERE s.sessionId = :sessionId")
-	@Query("{'sessionId': ?0}")
-	Optional<Object[]> findUserAndSessionBySessionId(int sessionId);
+	//@Query("{'sessionId': ?0}")
+	//Optional<Object[]> findUserAndSessionBySessionId(int sessionId);
 } 

@@ -23,8 +23,8 @@ public class ActivityLogService {
     }
     
     // get a activity log
-    public Optional<ActivityLog> getActivityLog(int logId) {
-    	return actLogRepo.findByLogId(logId);	
+    public Optional<ActivityLog> getActivityLog(String logId) {
+    	return actLogRepo.findById(logId);	
     }
     
     // get all activity logs by a specific user
@@ -40,7 +40,7 @@ public class ActivityLogService {
     // update an activity log
     public boolean updateActivityLog(ActivityLog updatedActLog) {
     	// check if it exists
-    	if (getActivityLog(updatedActLog.getLogId()).isPresent() == false) {
+    	if (getActivityLog(updatedActLog.getId()).isPresent() == false) {
     		return false;
     	}
     	actLogRepo.save(updatedActLog);
@@ -48,7 +48,7 @@ public class ActivityLogService {
     }
     
     // delete an activity log
-    public boolean deleteActivityLog(int actLogId) {
+    public boolean deleteActivityLog(String actLogId) {
     	// check if it exists
     	Optional<ActivityLog> findActLog = getActivityLog(actLogId);
     	if (findActLog.isPresent() == false) {

@@ -1,19 +1,23 @@
 package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
+import org.springframework.data.annotation.Id;
+
 public class Plant {
-    private int plantId;
+	
+	@Id
+    private String Id;
     private EdiblePlantSpecies ediblePlantSpecies;
     private User user;
     private String name;
     
     public Plant() {}
 
-	public int getPlantId() {
-		return plantId;
+	public String getId() {
+		return Id;
 	}
 
-	public void setPlantId(int plantId) {
-		this.plantId = plantId;
+	public void setId(String Id) {
+		this.Id = Id;
 	}
 
 	public EdiblePlantSpecies getEdiblePlantSpecies() {

@@ -42,18 +42,18 @@ public class SessionService {
     }
     
     // get session
-    public Optional<Session> getSession(int sessionId) {
-    	return sessionRepo.findBySessionId(sessionId);
+    public Optional<Session> getSession(String sessionId) {
+    	return sessionRepo.findById(sessionId);
     }
     
     // get user and session
-    public Optional<Object[]> getSessionAndUser(int sessionId) {
-    	Optional<Object[]> sessionAndUser = sessionRepo.findUserAndSessionBySessionId(sessionId);
-    	return sessionAndUser;
-    }
+    //public Optional<Object[]> getSessionAndUser(int sessionId) {
+    //	Optional<Object[]> sessionAndUser = sessionRepo.findUserAndSessionBySessionId(sessionId);
+    //	return sessionAndUser;
+    //}
     
     // get the session's user
-    public Optional<User> getSessionUser(int sessionId) {
+    public Optional<User> getSessionUser(String sessionId) {
     	//Optional<Object[]> sessionAndUser = getSessionAndUser(sessionId);
     	//if (sessionAndUser.isPresent() == false) {
     	//	return Optional.empty();
@@ -71,8 +71,8 @@ public class SessionService {
     }
     
     // update the session time
-    public boolean updateSessionTime(int sessionId) {
-    	Optional<Session> findSession = sessionRepo.findBySessionId(sessionId);
+    public boolean updateSessionTime(String sessionId) {
+    	Optional<Session> findSession = sessionRepo.findById(sessionId);
     	if (findSession.isEmpty()) {
     		return false;
     	}
@@ -87,8 +87,8 @@ public class SessionService {
     
     
     // end the session
-    public boolean endSession(int sessionId) {
-    	Optional<Session> findSession = sessionRepo.findBySessionId(sessionId);
+    public boolean endSession(String sessionId) {
+    	Optional<Session> findSession = sessionRepo.findById(sessionId);
     	if (findSession.isEmpty()) {
     		return false;
     	}
@@ -104,24 +104,24 @@ public class SessionService {
     
     
     // logout
-    public Session logoutOfSession(int sessionId) {
-    	// find the session and user
-    	Optional<Object[]> sessionAndUser = getSessionAndUser(sessionId);
+    //public Session logoutOfSession(String sessionId) {
+    //	// find the session and user
+    //	Optional<Session> sessionAndUser = getSession(sessionId);
     	// just start a new session if the id does not exist
-    	if (sessionAndUser.isEmpty()) {
-    		return startNewSession();
-    	}
-    	Object[] theObject = sessionAndUser.get();
+   // 	if (sessionAndUser.isEmpty()) {
+   // 		return startNewSession();
+   // 	}
+    //	Object[] theObject = sessionAndUser.get();
     	// check if there is a valid user (aka is logged in)
-    	Optional<User> theUser = Optional.of((User) theObject[1]);
-    	Session theSession = (Session) theObject[0];
+    //	Optional<User> theUser = Optional.of((User) theObject[1]);
+    //	Session theSession = (Session) theObject[0];
     	// if no valid user return the original user-less session
-    	if (theUser.isEmpty()) {
-    		return theSession;
-    	}
+    //	if (theUser.isEmpty()) {
+    //		return theSession;
+    //	}
     	// if was previously logged in
     	// end session
-    	endSession(theSession.getSessionId());
-    	return startNewSession();
-    }
+    //	endSession(theSession.getSessionId());
+    //	return startNewSession();
+    //}
 }

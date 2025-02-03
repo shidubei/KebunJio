@@ -32,7 +32,7 @@ public class ActivityLogController {
 	}
 	
 	@GetMapping("/{logId}")
-	public ResponseEntity<ActivityLog> getActivityLog(@PathVariable int logId) {
+	public ResponseEntity<ActivityLog> getActivityLog(@PathVariable String logId) {
         try {
             Optional<ActivityLog> findActLog = actLogService.getActivityLog(logId);
             if (findActLog.isPresent()) {
@@ -74,7 +74,7 @@ public class ActivityLogController {
 	}
 	
 	@GetMapping("/{logId}")
-	public ResponseEntity<ActivityLog> updateActivityLog(@PathVariable int logId, @RequestBody ActivityLog actLog) {
+	public ResponseEntity<ActivityLog> updateActivityLog(@PathVariable String logId, @RequestBody ActivityLog actLog) {
         try {
             Optional<ActivityLog> findActLog = actLogService.getActivityLog(logId);
             if (findActLog.isPresent()) {
@@ -94,7 +94,7 @@ public class ActivityLogController {
 	}
 	
 	@DeleteMapping("/{logId}")
-	public ResponseEntity<?> deleteActivityLog(@PathVariable int logId) {
+	public ResponseEntity<?> deleteActivityLog(@PathVariable String logId) {
 		try {
 			if (actLogService.deleteActivityLog(logId)) {
 				return ResponseEntity.ok().build();

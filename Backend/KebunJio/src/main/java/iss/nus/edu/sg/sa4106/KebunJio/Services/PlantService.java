@@ -23,8 +23,8 @@ public class PlantService {
     }
     
     // get a plant
-    public Optional<Plant> getPlant(int plantId) {
-    	return plantRepo.findByPlantId(plantId);	
+    public Optional<Plant> getPlant(String plantId) {
+    	return plantRepo.findById(plantId);	
     }
     
     // get all plants owned by a specific user
@@ -35,7 +35,7 @@ public class PlantService {
     // update a plant
     public boolean updatePlant(Plant updatedPlant) {
     	// check if it exists
-    	if (getPlant(updatedPlant.getPlantId()).isPresent() == false) {
+    	if (getPlant(updatedPlant.getId()).isPresent() == false) {
     		return false;
     	}
     	plantRepo.save(updatedPlant);
@@ -43,7 +43,7 @@ public class PlantService {
     }
     
     // delete a plant
-    public boolean deletePlant(int plantId) {
+    public boolean deletePlant(String plantId) {
     	// check if it exists
     	Optional<Plant> findPlant = getPlant(plantId);
     	if (findPlant.isPresent() == false) {
