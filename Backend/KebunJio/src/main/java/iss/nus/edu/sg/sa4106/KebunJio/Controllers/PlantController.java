@@ -68,6 +68,11 @@ public class PlantController {
             	foundPlant.setEdiblePlantSpecies(plant.getEdiblePlantSpecies());
             	foundPlant.setUser(plant.getUser());
             	foundPlant.setName(plant.getName());
+            	foundPlant.setDisease(plant.getDisease());
+            	foundPlant.setPlantedDate(plant.getPlantedDate());
+            	foundPlant.setHarvestStartDate(plant.getHarvestStartDate());
+            	foundPlant.setPlantHealth(plant.getPlantHealth());
+            	foundPlant.setHarvested(plant.getHarvested());
             	return ResponseEntity.ok(plantService.save(foundPlant));
             } else {
             	return ResponseEntity.notFound().build();

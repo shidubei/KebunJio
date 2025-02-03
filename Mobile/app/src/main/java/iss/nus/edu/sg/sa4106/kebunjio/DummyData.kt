@@ -50,13 +50,13 @@ class DummyData {
 
 
     private fun setupPlantDummy() {
-        val plant1 = Plant(0,0,0,"User 0 Type 0")
+        val plant1 = Plant(0,0,0,"User 0 Type 0","","","","",false)
         PlantDummy.add(plant1)
-        val plant2 = Plant(1,1,0,"User 0 Type 1")
+        val plant2 = Plant(1,1,0,"User 0 Type 1","","","","",false)
         PlantDummy.add(plant2)
-        val plant3 = Plant(2,1,1,"Plant 1 Type 1")
+        val plant3 = Plant(2,1,1,"Plant 1 Type 1","","","","",false)
         PlantDummy.add(plant3)
-        val plant4 = Plant(3,2,1,"User 1 Type 2")
+        val plant4 = Plant(3,2,1,"User 1 Type 2","","","","",false)
         PlantDummy.add(plant4)
     }
 

@@ -6,5 +6,10 @@ data class Plant(
     val plantId: Int,
     val ediblePlantSpeciesId: Int,
     val userId: Int,
-    val name: String
+    val name: String,
+    val disease: String,
+    val plantedDate: String,
+    val harvestStartDate: String,
+    val plantHealth: String,
+    val harvested: Boolean
 ) : Serializable

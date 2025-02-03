@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ActivityLog {
 	
 	@Id
@@ -12,6 +14,7 @@ public class ActivityLog {
     private Plant plant;
     private String activityType;
     private String activityDescription;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
     
 	public ActivityLog() {}

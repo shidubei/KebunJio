@@ -26,6 +26,8 @@ import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityAddPlantBinding
 import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 import iss.nus.edu.sg.sa4106.kebunjio.DummyData
+import iss.nus.edu.sg.sa4106.kebunjio.TimeClassHandler
+import iss.nus.edu.sg.sa4106.kebunjio.service.mlModel.MlModelService
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.DataOutputStream
@@ -45,6 +47,21 @@ class AddPlantActivity : AppCompatActivity() {
     private lateinit var showChosenImg: ImageView
     private lateinit var predictSpeciesText: TextView
     private lateinit var predictSpeciesBtn: Button
+
+    lateinit var plantDateTimeHandler: TimeClassHandler
+    lateinit var plantDateTimeText: TextView
+    lateinit var changePlantDateBtn: Button
+    lateinit var changePlantTimeBtn: Button
+
+    lateinit var harvestDateTimeHandler: TimeClassHandler
+    lateinit var harvestDateTimeText: TextView
+    lateinit var changeHarvestDateBtn: Button
+    lateinit var changeHarvestTimeBtn: Button
+
+    lateinit var plantHealthText: TextView
+    lateinit var diseaseText: TextView
+    lateinit var harvestedSpinner: Spinner
+
     private var dummyData: DummyData = DummyData()
 
     // services
@@ -114,6 +131,20 @@ class AddPlantActivity : AppCompatActivity() {
         predictSpeciesText = binding.predictSpeciesText
         predictSpeciesBtn = binding.predictSpeciesBtn
 
+        plantDateTimeText = binding.plantDateTimeText
+        changePlantDateBtn = binding.changePlantDateBtn
+        changePlantTimeBtn = binding.changePlantTimeBtn
+        plantDateTimeHandler = TimeClassHandler(plantDateTimeText,changePlantDateBtn,changePlantTimeBtn,this)
+
+        harvestDateTimeText = binding.harvestDateTimeText
+        changeHarvestDateBtn = binding.changeHarvestDateBtn
+        changeHarvestTimeBtn = binding.changeHarvestTimeBtn
+        harvestDateTimeHandler = TimeClassHandler(harvestDateTimeText,changeHarvestDateBtn,changeHarvestTimeBtn,this)
+
+        plantHealthText = binding.plantHealthText
+        diseaseText = binding.diseaseText
+        harvestedSpinner = binding.harvestedSpinner
+
         // set the spinner options
         val spinnerOptions = dummyData.nameList()
         val spinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
@@ -122,6 +153,14 @@ class AddPlantActivity : AppCompatActivity() {
 
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         speciesSpinner.adapter = spinAdapter
+
+        // set harvest spinner options
+        val harvestSpinnerOptions = mutableListOf("Harvested","Not Harvested")
+        val harvestSpinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
+                                                                                android.R.layout.simple_spinner_item,
+                                                                                harvestSpinnerOptions)
+        harvestSpinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        harvestedSpinner.adapter = harvestSpinAdapter
 
         // for choosing an image to show
         selectImageBtn.setOnClickListener {
@@ -153,7 +192,12 @@ class AddPlantActivity : AppCompatActivity() {
         val ediblePlantSpeciesId = speciesSpinner.selectedItemPosition // must assign a proper id later
         val userId = -1 // must assign a proper id later
         val name = nameEditText.text.toString()
-        val newPlant = Plant(plantId, ediblePlantSpeciesId, userId, name)
+        val disease = diseaseText.text.toString()
+        val plantedDate = plantDateTimeText.text.toString()
+        val harvestStartDate = harvestDateTimeText.text.toString()
+        val plantHealth = plantHealthText.text.toString()
+        val harvested = harvestedSpinner.selectedItem.toString() == "Harvested"
+        val newPlant = Plant(plantId, ediblePlantSpeciesId, userId, name,disease,plantedDate,harvestStartDate,plantHealth,harvested)
         // TODO: add the new plant
     }
 

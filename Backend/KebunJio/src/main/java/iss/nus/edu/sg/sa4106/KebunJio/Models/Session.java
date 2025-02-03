@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Session {
 
 	@Id
 	private String id;
 	private User user;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime startDateTime;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime lastActionDateTime;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime endDateTime;
 	
 	public Session() {}
