@@ -18,9 +18,8 @@ public class PlantService {
 
     // make a new plant
     @Transactional
-    public boolean makeNewPlant(Plant newPlant) {
-    	plantRepo.save(newPlant);
-    	return true;
+    public Plant save(Plant newPlant) {
+    	return plantRepo.save(newPlant);
     }
     
     // get a plant

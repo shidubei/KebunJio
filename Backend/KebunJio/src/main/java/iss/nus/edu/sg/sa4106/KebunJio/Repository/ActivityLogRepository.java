@@ -10,9 +10,12 @@ import java.util.Optional;
 import iss.nus.edu.sg.sa4106.KebunJio.Models.ActivityLog;
 
 public interface ActivityLogRepository extends MongoRepository<ActivityLog,String> {
+	@Query("{'logId': ?0}")
 	Optional<ActivityLog> findByLogId(int logId);
-	@Query("SELECT l FROM ActivityLog l JOIN l.user u WHERE u.id = :userId")
+	//@Query("SELECT l FROM ActivityLog l JOIN l.user u WHERE u.id = :userId")
+	@Query("{'userId': ?0}")
 	List<ActivityLog> findByUserId(@Param("userId") String userId);
-	@Query("SELECT l FROM ActivityLog p JOIN p.user u WHERE p.plantId = :plantId")
+	//@Query("SELECT l FROM ActivityLog p JOIN p.user u WHERE p.plantId = :plantId")
+	@Query("{'plantId': ?0}")
 	List<ActivityLog> findByPlantId(@Param("plantId") String plantId);
 }

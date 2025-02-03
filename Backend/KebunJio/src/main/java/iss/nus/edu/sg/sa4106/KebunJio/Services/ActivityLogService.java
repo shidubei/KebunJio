@@ -18,9 +18,8 @@ public class ActivityLogService {
 
     // make a new activity log
     @Transactional
-    public boolean makeNewActivityLog(ActivityLog newActLog) {
-    	actLogRepo.save(newActLog);
-    	return true;
+    public ActivityLog save(ActivityLog newActLog) {
+    	return actLogRepo.save(newActLog);
     }
     
     // get a activity log

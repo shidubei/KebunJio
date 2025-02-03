@@ -54,13 +54,20 @@ public class SessionService {
     
     // get the session's user
     public Optional<User> getSessionUser(int sessionId) {
-    	Optional<Object[]> sessionAndUser = getSessionAndUser(sessionId);
-    	if (sessionAndUser.isPresent() == false) {
+    	//Optional<Object[]> sessionAndUser = getSessionAndUser(sessionId);
+    	//if (sessionAndUser.isPresent() == false) {
+    	//	return Optional.empty();
+    	//}
+    	//Object[] theObject = sessionAndUser.get();
+    	//Optional<User> theUser = Optional.of((User) theObject[1]);
+    	//return theUser;
+    	Optional<Session> findSession = getSession(sessionId);
+    	if (findSession.isPresent() == false) {
     		return Optional.empty();
     	}
-    	Object[] theObject = sessionAndUser.get();
-    	Optional<User> theUser = Optional.of((User) theObject[1]);
-    	return theUser;
+    	Session thisSession = findSession.get();
+    	Optional<User> findUser = userRepo.findById(thisSession.getUser().getId());
+    	return findUser;
     }
     
     // update the session time
