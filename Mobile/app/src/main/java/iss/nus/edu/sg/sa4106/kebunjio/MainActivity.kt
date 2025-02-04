@@ -22,13 +22,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun startActivity() {
         //val intent = Intent(this, ReminderActivity::class.java)
-        val intent = Intent(this, PlantHealthCheckActivity::class.java)
+        val intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
 
     }
-
-//     private fun startActivity() {
-//         val intent = Intent(this, ReminderActivity::class.java)
-//         startActivity(intent)
-//     }
 }
