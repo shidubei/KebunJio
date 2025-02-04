@@ -19,6 +19,8 @@ import iss.nus.edu.sg.sa4106.kebunjio.DummyData
 import iss.nus.edu.sg.sa4106.kebunjio.R
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityViewPlantDetailsBinding
 import iss.nus.edu.sg.sa4106.kebunjio.data.EdiblePlantSpecies
+import iss.nus.edu.sg.sa4106.kebunjio.features.planthealthcheck.PlantHealthCheckActivity
+import iss.nus.edu.sg.sa4106.kebunjio.features.reminders.ReminderActivity
 import iss.nus.edu.sg.sa4106.kebunjio.service.DownloadImageService
 import java.io.File
 
@@ -33,10 +35,13 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
     lateinit var plantDateText: TextView
     lateinit var harvestDateText: TextView
     lateinit var healthText: TextView
+    lateinit var reminderText: TextView
     lateinit var diseaseText: TextView
     lateinit var harvestedText: TextView
     lateinit var listLog: ListView
     lateinit var backBtn: Button
+    lateinit var healthBtn: Button
+    lateinit var reminderBtn: Button
 
     private val dummy = DummyData()
 
@@ -80,13 +85,26 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         plantDateText = binding.plantDateTimeText
         harvestDateText = binding.harvestDateTimeText
         healthText = binding.plantHealthText
+        reminderText = binding.reminderText
         diseaseText = binding.plantDiseaseText
         harvestedText = binding.harvestedText
         listLog = binding.logList
         backBtn = binding.goBackBtn
+        healthBtn = binding.healthBtn
+        reminderBtn = binding.reminderBtn
 
         backBtn.setOnClickListener {
             finish()
+        }
+
+        healthBtn.setOnClickListener {
+            val intent = Intent(this, PlantHealthCheckActivity::class.java)
+            startActivity(intent)
+        }
+
+        reminderBtn.setOnClickListener {
+            val intent = Intent(this, ReminderActivity::class.java)
+            startActivity(intent)
         }
 
         // setup to receive broadcast from MyDownloadService
@@ -106,6 +124,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         }
     }
 
+
     private fun showPlant(plantId: String) {
         val thisPlant = dummy.getPlantById(plantId)
         if (thisPlant == null) {
@@ -120,6 +139,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         plantDateText.text = thisPlant.plantedDate
         harvestDateText.text = thisPlant.harvestStartDate
         healthText.text = thisPlant.plantHealth
+//        reminderText.text = thisPlant.reminder
         diseaseText.text = thisPlant.disease
         if (thisPlant.harvested) {
             harvestedText.text = "Harvested"
