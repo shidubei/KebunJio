@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Plant {
 	
 	@Id
-    private String Id;
+    private String id;
     private EdiblePlantSpecies ediblePlantSpecies;
     private User user;
     private String name;
@@ -25,11 +25,11 @@ public class Plant {
     public Plant() {}
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(String Id) {
-		this.Id = Id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public EdiblePlantSpecies getEdiblePlantSpecies() {
