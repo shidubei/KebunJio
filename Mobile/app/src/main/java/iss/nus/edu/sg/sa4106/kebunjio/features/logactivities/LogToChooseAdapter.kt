@@ -27,7 +27,7 @@ import java.io.File
 
 class LogToChooseAdapter(private val context: Context,
                          protected var userActLogList: MutableList<ActivityLog>,
-                         protected var plantIdToName: MutableMap<Int, String>
+                         protected var plantIdToName: MutableMap<String, String>
         ): ArrayAdapter<Any?>(context, R.layout.view_plant_to_choose) {
 
     //private var _binding: ViewPlantToChooseBinding? = null
@@ -58,7 +58,7 @@ class LogToChooseAdapter(private val context: Context,
         } else {
             binding = ViewActLogToChooseBinding.bind(_view)
         }
-        val positionId = userActLogList[position].logId
+        val positionId = userActLogList[position].id
         Log.d("LogToChooseAdapter","do for positionId: ${positionId}")
         val userId = userActLogList[position].userId
         val activityType = userActLogList[position].activityType

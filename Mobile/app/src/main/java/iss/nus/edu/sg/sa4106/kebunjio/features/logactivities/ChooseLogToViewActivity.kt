@@ -19,7 +19,7 @@ class ChooseLogToViewActivity : AppCompatActivity() {
     private var _binding: ActivityChooseLogToViewBinding? = null
     private val binding get() = _binding!!
     private val dummy = DummyData()
-    private val userId = 0
+    private val userId = "a"
 
     lateinit var logToViewText: TextView
     lateinit var actLogList: ListView
@@ -49,14 +49,17 @@ class ChooseLogToViewActivity : AppCompatActivity() {
         //}
 
         val userActLogList = dummy.getUserLogs(userId)
-        val plantList = dummy.PlantDummy
-        val plantIdToName: MutableMap<Int, String> = mutableMapOf<Int, String>()
+        //val plantList = dummy.PlantDummy
+        val plantIdToName: MutableMap<String, String> = mutableMapOf<String, String>()
 
         for (i in 0..userActLogList.size-1) {
-            Log.d("ChooseLogToViewActivity","plantId for logId ${userActLogList[i].logId}: ${userActLogList[i].plantId}")
+            Log.d("ChooseLogToViewActivity","plantId for logId ${userActLogList[i].id}: ${userActLogList[i].plantId}")
             var plantId = userActLogList[i].plantId
-            if (plantId != null) {
-                plantIdToName[plantId] = plantList[plantId].name
+            if (plantId == null) {
+            } else if (plantIdToName.contains(plantId)) {
+            } else {
+                val plantName = dummy.getPlantById(plantId)!!.name
+                plantIdToName[plantId] = plantName
             }
         }
 

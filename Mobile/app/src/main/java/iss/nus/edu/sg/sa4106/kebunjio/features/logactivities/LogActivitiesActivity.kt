@@ -19,9 +19,9 @@ import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityLogActivitiesBinding
 
 class LogActivitiesActivity : AppCompatActivity() {
 
-    var currentUserId: Int = 0
+    private var currentUserId: String? = ""
 
-    private var updateLogId: Int? = null
+    private var updateLogId: String? = null
 
     // for ui
     private var _binding: ActivityLogActivitiesBinding? = null
@@ -36,7 +36,7 @@ class LogActivitiesActivity : AppCompatActivity() {
     lateinit var activityTypeSpinner: Spinner
     lateinit var activityDescText: EditText
     lateinit var plantSpinner: Spinner
-    private var plantSpinnerIdxToId = mutableListOf<Int>()
+    private var plantSpinnerIdxToId = mutableListOf<String>()
     private var dummyData: DummyData = DummyData()
 
     lateinit var logActTypes: MutableList<String>
@@ -79,29 +79,37 @@ class LogActivitiesActivity : AppCompatActivity() {
             insets
         }
         // get the current user id
-        currentUserId = intent.getIntExtra("userId",-1)
+        currentUserId = intent.getStringExtra("userId")
         Log.d("LogActivitiesActivity","userId: ${currentUserId}")
-        setUserPlants(currentUserId)
+        if (currentUserId != null) {
+            setUserPlants(currentUserId!!)
+        }
         if (intent.getBooleanExtra("update",false)) {
             Log.d("LogActivitiesActivity","We are in update mode")
             binding.titlePart.text = "Update Activity Log"
             binding.logActivitiesBtn.text = "Update Log"
-            val logId = intent.getIntExtra("logId",-1)
+            val logId = intent.getStringExtra("logId")
             Log.d("LogActivitiesActivity","logId: ${logId}")
-            val chosenActLog = dummyData.ActivityLogDummy[logId]
-            setData(chosenActLog)
+            if (logId != null) {
+                val chosenActLog = dummyData.getActivityLogById(logId)
+                if (chosenActLog != null) {
+                    setData(chosenActLog)
+                }
+            }
+
+
         }
     }
 
 
-    private fun setUserPlants(id: Int) {
+    private fun setUserPlants(id: String) {
         plantSpinnerIdxToId.clear()
-        plantSpinnerIdxToId.add(-1)
+        plantSpinnerIdxToId.add("")
         val userPlants = dummyData.getUserPlants(id)
         val userPlantNames: MutableList<String> = mutableListOf<String>("NO PLANT")
         for (i in 0..userPlants.size-1) {
             userPlantNames.add(userPlants[i].name)
-            plantSpinnerIdxToId.add(userPlants[i].plantId)
+            plantSpinnerIdxToId.add(userPlants[i].id)
         }
         val plantAdapter = ArrayAdapter(this,
             android.R.layout.simple_spinner_item,
@@ -112,7 +120,7 @@ class LogActivitiesActivity : AppCompatActivity() {
 
 
     public fun setData(actLog: ActivityLog) {
-        updateLogId = actLog.logId
+        updateLogId = actLog.id
         // Never set the user in setData
         //currentUserId = actLog.userId
         Log.d("LogActivitiesActivity","plantId: ${actLog.plantId}")
@@ -129,12 +137,15 @@ class LogActivitiesActivity : AppCompatActivity() {
 
 
     private fun logNewActivity() {
-        var logId = -1 // Must assign a proper id later
+        var logId = "" // Must assign a proper id later
         if (updateLogId!=null){
             logId = updateLogId!!
         }
-        val userId = currentUserId // must assign a proper id later
-        var plantId: Int? = null // must assign a proper id later
+        var userId = ""
+        if (currentUserId!=null) {
+            userId = currentUserId!! // must assign a proper id later
+        }
+        var plantId: String? = null // must assign a proper id later
         if (plantSpinner.selectedItemPosition > 0) {
             plantId = plantSpinnerIdxToId[plantSpinner.selectedItemPosition]
         }

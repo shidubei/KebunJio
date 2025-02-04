@@ -38,13 +38,16 @@ import java.net.URL
 class AddPlantActivity : AppCompatActivity() {
 
     // for the UI
-    private var updatePlantId: Int? = null
-    private var updateUserId: Int = 0
+    private var updatePlantId: String? = null
+    private var updateUserId: String? = null
 
     private var _binding: ActivityAddPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var nameEditText: EditText
+
     private lateinit var speciesSpinner: Spinner
+    private var speciesSpinnerIdxToId = mutableListOf<String>()
+
     private lateinit var selectImageBtn: Button
     private lateinit var addPlantBtn: Button
     private lateinit var showChosenImg: ImageView
@@ -73,6 +76,8 @@ class AddPlantActivity : AppCompatActivity() {
     //variables for service, set bound to false
     private var svc: MlModelService? = null
     private var isBound: Boolean? = false
+
+
 
     //set up service to connection
     val conn = object : ServiceConnection {
@@ -150,14 +155,7 @@ class AddPlantActivity : AppCompatActivity() {
         diseaseText = binding.diseaseText
         harvestedSpinner = binding.harvestedSpinner
 
-        // set the spinner options
-        val spinnerOptions = dummyData.nameList()
-        val spinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
-                                                                        android.R.layout.simple_spinner_item,
-                                                                        spinnerOptions)
-
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        speciesSpinner.adapter = spinAdapter
+        setupSpeciesSpinner()
 
         // set harvest spinner options
         val harvestSpinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
@@ -189,18 +187,41 @@ class AddPlantActivity : AppCompatActivity() {
         }
 
         // if updating
-        updateUserId = intent.getIntExtra("userId",-1)
+        updateUserId = intent.getStringExtra("userId")
         Log.d("AddPlantActivity","userId: ${updateUserId}")
         if (intent.getBooleanExtra("update",false)) {
             Log.d("AddPlantActivity","We are in update mode")
             binding.titlePart.text = "Update Plant"
             binding.addPlantBtn.text = "Update Plant"
-            val plantId = intent.getIntExtra("plantId",-1)
+            val plantId = intent.getStringExtra("plantId")
             Log.d("AddPlantActivity","plantId: ${plantId}")
-            val chosenPlant = dummyData.PlantDummy[plantId]
-            setData(chosenPlant)
+            if (plantId != null) {
+                val chosenPlant = dummyData.getPlantById(plantId)
+                if (chosenPlant != null) {
+                    setData(chosenPlant)
+                }
+            }
+
         }
     }
+
+
+    fun setupSpeciesSpinner() {
+        speciesSpinnerIdxToId.clear()
+        val spinnerOptions = mutableListOf<String>()
+        for (i in 0..dummyData.SpeciesDummy.size-1) {
+            speciesSpinnerIdxToId.add(dummyData.SpeciesDummy[i].id)
+            spinnerOptions.add(dummyData.SpeciesDummy[i].name)
+        }
+        // set the spinner options
+        val spinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item,
+            spinnerOptions)
+
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        speciesSpinner.adapter = spinAdapter
+    }
+
 
     public fun bindNeededService() {
         // bind service
@@ -209,9 +230,9 @@ class AddPlantActivity : AppCompatActivity() {
     }
 
     public fun setData(plant: Plant) {
-        updatePlantId = plant.plantId
+        updatePlantId = plant.id
         Log.d("AddPlantActivity","set ediblePlantSpeciesId: ${plant.ediblePlantSpeciesId}")
-        speciesSpinner.setSelection(plant.ediblePlantSpeciesId)
+        speciesSpinner.setSelection(speciesSpinnerIdxToId.indexOf(plant.ediblePlantSpeciesId))
         updateUserId = plant.userId
         nameEditText.setText(plant.name)
         diseaseText.setText(plant.disease)
@@ -228,12 +249,15 @@ class AddPlantActivity : AppCompatActivity() {
     }
 
     private fun addNewPlant() {
-        var plantId = -1 // Must assign a proper id later
+        var plantId: String = "" // Must assign a proper id later
         if (updatePlantId != null) {
             plantId = updatePlantId!!
         }
-        val ediblePlantSpeciesId = speciesSpinner.selectedItemPosition // must assign a proper id later
-        val userId = updateUserId // must assign a proper id later
+        val ediblePlantSpeciesId = harvestSpinnerOptions[speciesSpinner.selectedItemPosition] // must assign a proper id later
+        var userId = updateUserId // must assign a proper id later
+        if (userId==null){
+            userId = ""
+        }
         val name = nameEditText.text.toString()
         val disease = diseaseText.text.toString()
         val plantedDate = plantDateTimeText.text.toString()

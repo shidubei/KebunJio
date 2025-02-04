@@ -111,7 +111,7 @@ class PlantToChooseAdapter(private val context: Context,
         //}
 
         viewPlantBtn.setOnClickListener{
-            val thisId = this.plantList[position].plantId
+            val thisId = this.plantList[position].id
             val userId = this.plantList[position].userId
             val intent = Intent(getContext(), ViewPlantDetailsActivity::class.java)
             intent.putExtra("plantId", thisId)
@@ -119,7 +119,7 @@ class PlantToChooseAdapter(private val context: Context,
         }
 
         editPlantBtn.setOnClickListener{
-            val thisId = this.plantList[position].plantId
+            val thisId = this.plantList[position].id
             val userId = this.plantList[position].userId
             val intent = Intent(getContext(), AddPlantActivity::class.java)
             intent.putExtra("update", true)

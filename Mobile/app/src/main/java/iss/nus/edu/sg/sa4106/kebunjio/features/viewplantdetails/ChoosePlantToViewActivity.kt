@@ -22,7 +22,7 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
     private var _binding: ActivityChoosePlantToViewBinding? = null
     private val binding get() = _binding!!
     private val dummy = DummyData()
-    private val userId = 0
+    private val userId = "a"
 
     lateinit var plantToViewText: TextView
     lateinit var plantList: ListView

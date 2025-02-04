@@ -99,19 +99,24 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         }
 
         // get the id to show
-        val plantId = intent.getIntExtra("plantId",-1)
-        if (plantId != -1) {
+        val plantId = intent.getStringExtra("plantId")
+        if (plantId != null) {
             // make dummy data
             showPlant(plantId)
         }
     }
 
-    private fun showPlant(plantId: Int) {
-        val thisPlant = dummy.PlantDummy[plantId]
+    private fun showPlant(plantId: String) {
+        val thisPlant = dummy.getPlantById(plantId)
+        if (thisPlant == null) {
+            return
+        }
         plantNameText.text = "Name: ${thisPlant.name}"
-        val thisSpecies = dummy.SpeciesDummy[thisPlant.ediblePlantSpeciesId]
-        val speciesText = "Species: ${thisSpecies.name} (${thisSpecies.scientificName})"
-        speciesNameText.text = speciesText
+        val thisSpecies = dummy.getSpeciesById(thisPlant.ediblePlantSpeciesId)
+        if (thisSpecies != null) {
+            val speciesText = "Species: ${thisSpecies.name} (${thisSpecies.scientificName})"
+            speciesNameText.text = speciesText
+        }
         plantDateText.text = thisPlant.plantedDate
         harvestDateText.text = thisPlant.harvestStartDate
         healthText.text = thisPlant.plantHealth
