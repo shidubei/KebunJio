@@ -16,7 +16,7 @@ function ForumNewPost() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value })
   };
 
   const handleFileChange = (e) => {
@@ -27,10 +27,10 @@ function ForumNewPost() {
     e.preventDefault();
     //if all are filled
     if(formData.category!==''&&formData.title!==''&&formData.question!==''){
-      console.log('Form submitted:', formData);
-      alert('Post created successfully!');
+      console.log('Form submitted:', formData)
+      alert('Post created successfully!')
     }
-  };
+  }
 
   const resetPost = (e) => {
     setFormData({ category: '', title: '', question: '', image: null })
