@@ -1,7 +1,10 @@
 package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
+import org.springframework.data.annotation.Id;
+
 public class EdiblePlantSpecies {
-    private int ediblePlantSpeciesId;
+	@Id
+    private String id;
     private String name;
     private String scientificName;
     private String description;
@@ -17,12 +20,12 @@ public class EdiblePlantSpecies {
     
     public EdiblePlantSpecies() {}
 
-	public int getEdiblePlantSpeciesId() {
-		return ediblePlantSpeciesId;
+	public String getId() {
+		return id;
 	}
 
-	public void setEdiblePlantSpeciesId(int ediblePlantSpeciesId) {
-		this.ediblePlantSpeciesId = ediblePlantSpeciesId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
