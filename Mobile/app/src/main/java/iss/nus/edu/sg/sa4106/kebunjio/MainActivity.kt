@@ -27,12 +27,8 @@ class MainActivity : AppCompatActivity() {
         //val intent = Intent(this, ReminderActivity::class.java)
         //val intent = Intent(this, ChooseLogToViewActivity::class.java)
         val intent = Intent(this, ChoosePlantToViewActivity::class.java)
+        //val intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
 
     }
-
-//     private fun startActivity() {
-//         val intent = Intent(this, ReminderActivity::class.java)
-//         startActivity(intent)
-//     }
 }
