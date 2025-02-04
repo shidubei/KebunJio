@@ -124,6 +124,7 @@ class ViewPlantDetailsActivity : AppCompatActivity() {
         }
     }
 
+
     private fun showPlant(plantId: String) {
         val thisPlant = dummy.getPlantById(plantId)
         if (thisPlant == null) {

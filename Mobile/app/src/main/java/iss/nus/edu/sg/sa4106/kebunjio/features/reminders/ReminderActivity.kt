@@ -46,8 +46,12 @@ class ReminderActivity : AppCompatActivity() {
     private fun initButtons() {
 
         binding.viewPlantDetailsButton.setOnClickListener {
-            val intent = Intent(this, ViewPlantDetailsActivity::class.java)
-            startActivity(intent)
+            // The below scripts are opening a new ViewPlantDetailsActivity, not going back
+            // to the previous view.
+            //val intent = Intent(this, ViewPlantDetailsActivity::class.java)
+            //startActivity(intent)
+            // 'finish' is used to close the activity
+            finish()
         }
 
         binding.timeButton.setOnClickListener {
