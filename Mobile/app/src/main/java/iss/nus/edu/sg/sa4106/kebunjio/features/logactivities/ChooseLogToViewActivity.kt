@@ -2,6 +2,7 @@ package iss.nus.edu.sg.sa4106.kebunjio.features.logactivities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -52,6 +53,7 @@ class ChooseLogToViewActivity : AppCompatActivity() {
         val plantIdToName: MutableMap<Int, String> = mutableMapOf<Int, String>()
 
         for (i in 0..userActLogList.size-1) {
+            Log.d("ChooseLogToViewActivity","plantId for logId ${userActLogList[i].logId}: ${userActLogList[i].plantId}")
             var plantId = userActLogList[i].plantId
             if (plantId != null) {
                 plantIdToName[plantId] = plantList[plantId].name

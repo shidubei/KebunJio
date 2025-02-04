@@ -18,11 +18,11 @@ class DummyData {
 
 
     private fun setupLogDummy() {
-        val log1 = ActivityLog(0,0,0,"Water","500ml","01/01/2020 15:30")
+        val log1 = ActivityLog(0,0,0,"Water","500ml","2020-01-01T15:30:00")
         ActivityLogDummy.add(log1)
-        val log2 = ActivityLog(0,0,0,"Water","500ml","02/01/2020 15:26")
+        val log2 = ActivityLog(1,0,0,"Water","500ml","2020-01-02T15:26:00")
         ActivityLogDummy.add(log2)
-        val log3 = ActivityLog(0,0,1,"Fertiliser","500ml","02/01/2020 15:28")
+        val log3 = ActivityLog(2,0,1,"Fertilize","500ml","2020-01-02T15:28:00")
         ActivityLogDummy.add(log3)
     }
 

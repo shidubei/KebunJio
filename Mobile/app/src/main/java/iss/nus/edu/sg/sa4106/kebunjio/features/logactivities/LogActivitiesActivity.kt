@@ -1,6 +1,7 @@
 package iss.nus.edu.sg.sa4106.kebunjio.features.logactivities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -18,8 +19,9 @@ import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityLogActivitiesBinding
 
 class LogActivitiesActivity : AppCompatActivity() {
 
+    var currentUserId: Int = 0
+
     private var updateLogId: Int? = null
-    private var updateUserId: Int = -1
 
     // for ui
     private var _binding: ActivityLogActivitiesBinding? = null
@@ -34,7 +36,7 @@ class LogActivitiesActivity : AppCompatActivity() {
     lateinit var activityTypeSpinner: Spinner
     lateinit var activityDescText: EditText
     lateinit var plantSpinner: Spinner
-    var currentUser: Int = 0
+    private var plantSpinnerIdxToId = mutableListOf<Int>()
     private var dummyData: DummyData = DummyData()
 
     lateinit var logActTypes: MutableList<String>
@@ -56,23 +58,11 @@ class LogActivitiesActivity : AppCompatActivity() {
         logActivitiesBtn = binding.logActivitiesBtn
         plantSpinner = binding.plantSpinner
 
-        val userPlants = dummyData.getUserPlants(currentUser)
-        val userPlantNames: MutableList<String> = mutableListOf<String>()
-        userPlantNames.add("NO PLANT")
-        for (i in 0..userPlants.size-1) {
-            userPlantNames.add(userPlants[i].name)
-        }
         logActTypes = mutableListOf<String>()
         logActTypes.add("Water")
         logActTypes.add("Fertilize")
         logActTypes.add("Harvest")
         logActTypes.add("Withered")
-
-        val plantAdapter = ArrayAdapter(this,
-                                    android.R.layout.simple_spinner_item,
-                                    userPlantNames)
-        plantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        plantSpinner.adapter = plantAdapter
 
         val logActAdapter = ArrayAdapter(this,
                                     android.R.layout.simple_spinner_item,
@@ -88,25 +78,50 @@ class LogActivitiesActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // if updating
-        updateUserId = intent.getIntExtra("userId",-1)
+        // get the current user id
+        currentUserId = intent.getIntExtra("userId",-1)
+        Log.d("LogActivitiesActivity","userId: ${currentUserId}")
+        setUserPlants(currentUserId)
         if (intent.getBooleanExtra("update",false)) {
-            binding.titlePart.text = "Edit Activity Log"
+            Log.d("LogActivitiesActivity","We are in update mode")
+            binding.titlePart.text = "Update Activity Log"
+            binding.logActivitiesBtn.text = "Update Log"
             val logId = intent.getIntExtra("logId",-1)
+            Log.d("LogActivitiesActivity","logId: ${logId}")
             val chosenActLog = dummyData.ActivityLogDummy[logId]
             setData(chosenActLog)
         }
     }
 
 
+    private fun setUserPlants(id: Int) {
+        plantSpinnerIdxToId.clear()
+        plantSpinnerIdxToId.add(-1)
+        val userPlants = dummyData.getUserPlants(id)
+        val userPlantNames: MutableList<String> = mutableListOf<String>("NO PLANT")
+        for (i in 0..userPlants.size-1) {
+            userPlantNames.add(userPlants[i].name)
+            plantSpinnerIdxToId.add(userPlants[i].plantId)
+        }
+        val plantAdapter = ArrayAdapter(this,
+            android.R.layout.simple_spinner_item,
+            userPlantNames)
+        plantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        plantSpinner.adapter = plantAdapter
+    }
+
+
     public fun setData(actLog: ActivityLog) {
         updateLogId = actLog.logId
-        updateUserId = actLog.userId
+        // Never set the user in setData
+        //currentUserId = actLog.userId
+        Log.d("LogActivitiesActivity","plantId: ${actLog.plantId}")
         if (actLog.plantId!=null) {
-            plantSpinner.setSelection(actLog.plantId+1)
+            plantSpinner.setSelection(plantSpinnerIdxToId.indexOf(actLog.plantId))
         } else {
             plantSpinner.setSelection(0)
         }
+        Log.d("LogActivitiesActivity","Activity Type: ${actLog.activityType}")
         activityTypeSpinner.setSelection(logActTypes.indexOf(actLog.activityType))
         activityDescText.setText(actLog.activityDescription)
         timeStampText.text = actLog.timestamp
@@ -118,16 +133,16 @@ class LogActivitiesActivity : AppCompatActivity() {
         if (updateLogId!=null){
             logId = updateLogId!!
         }
-        val userId = updateUserId // must assign a proper id later
+        val userId = currentUserId // must assign a proper id later
         var plantId: Int? = null // must assign a proper id later
         if (plantSpinner.selectedItemPosition > 0) {
-            plantId = plantSpinner.selectedItemPosition - 1
+            plantId = plantSpinnerIdxToId[plantSpinner.selectedItemPosition]
         }
         val activityType = activityTypeSpinner.selectedItem.toString()
         val activityDesc = activityDescText.text.toString()
         val timeStamp = timeStampText.text.toString()
 
-        var ActivityLog = ActivityLog(logId,userId,plantId,activityType,activityDesc,timeStamp)
+        var actLog = ActivityLog(logId,userId,plantId,activityType,activityDesc,timeStamp)
         // TODO: log the new activity
     }
 

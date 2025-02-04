@@ -2,6 +2,7 @@ package iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,16 +42,16 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
         plantList = binding.plantList
         addFAB = binding.addFab
 
-        val userPlants = dummy.getUserPlants(0)
-        val idList: MutableList<Int> = mutableListOf<Int>()
-        val nameList: MutableList<String> = mutableListOf<String>()
+        val userPlants = dummy.getUserPlants(userId)
+        //val idList: MutableList<Int> = mutableListOf<Int>()
+        //val nameList: MutableList<String> = mutableListOf<String>()
 
-        for (i in 0..userPlants.size-1) {
-            idList.add(userPlants[i].plantId)
-            nameList.add(userPlants[i].name)
-        }
+        //for (i in 0..userPlants.size-1) {
+        //    idList.add(userPlants[i].plantId)
+        //    nameList.add(userPlants[i].name)
+        //}
 
-        if (idList.size==0) {
+        if (userPlants.size==0) {
             plantToViewText.text = "No plants to view"
         } else {
             plantToViewText.text = "Choose Plant to View"
@@ -59,9 +60,10 @@ class ChoosePlantToViewActivity : AppCompatActivity() {
         addFAB.setOnClickListener {
             val intent = Intent(this,AddPlantActivity::class.java)
             intent.putExtra("userId",userId)
+            Log.d("ChoosePlantToViewActivity","putExtra userId: ${userId}")
             this.startActivity(intent)
         }
 
-        plantList.adapter = PlantToChooseAdapter(this,idList,nameList)
+        plantList.adapter = PlantToChooseAdapter(this,userPlants)
     }
 }

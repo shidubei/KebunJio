@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ActivityMainBinding
+import iss.nus.edu.sg.sa4106.kebunjio.features.logactivities.ChooseLogToViewActivity
 import iss.nus.edu.sg.sa4106.kebunjio.features.logactivities.LogActivitiesActivity
 
 import iss.nus.edu.sg.sa4106.kebunjio.features.planthealthcheck.PlantHealthCheckActivity
 import iss.nus.edu.sg.sa4106.kebunjio.features.reminders.ReminderActivity
+import iss.nus.edu.sg.sa4106.kebunjio.features.viewplantdetails.ChoosePlantToViewActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun startActivity() {
         //val intent = Intent(this, ReminderActivity::class.java)
-        val intent = Intent(this, LogActivitiesActivity::class.java)
+        val intent = Intent(this, ChooseLogToViewActivity::class.java)
         startActivity(intent)
 
     }

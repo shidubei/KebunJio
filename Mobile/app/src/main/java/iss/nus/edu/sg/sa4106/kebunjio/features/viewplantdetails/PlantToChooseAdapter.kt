@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.registerReceiver
 import iss.nus.edu.sg.sa4106.kebunjio.R
+import iss.nus.edu.sg.sa4106.kebunjio.data.Plant
 import iss.nus.edu.sg.sa4106.kebunjio.databinding.ViewPlantToChooseBinding
 import iss.nus.edu.sg.sa4106.kebunjio.features.addplant.AddPlantActivity
 import iss.nus.edu.sg.sa4106.kebunjio.service.DownloadImageService
@@ -24,8 +25,7 @@ import java.io.File
 
 
 class PlantToChooseAdapter(private val context: Context,
-                           protected var idList: MutableList<Int>,
-                           protected var nameList: MutableList<String>
+                           protected var plantList: MutableList<Plant>
         ): ArrayAdapter<Any?>(context, R.layout.view_plant_to_choose) {
 
     //private var _binding: ViewPlantToChooseBinding? = null
@@ -35,7 +35,7 @@ class PlantToChooseAdapter(private val context: Context,
     //lateinit var showPlantName: TextView
     //lateinit var viewPlantBtn: Button
     //lateinit var deletePlantBtn: Button
-    lateinit var storedPlantId:  MutableList<Int>
+    lateinit var storedPlants:  MutableList<Plant>
 
     //protected var receiver: BroadcastReceiver = object : BroadcastReceiver() {
     //    override fun onReceive(context: Context, intent: Intent) {
@@ -71,10 +71,10 @@ class PlantToChooseAdapter(private val context: Context,
 
 
     init {
-        for (i in 0..nameList.size-1) {
+        for (i in 0..plantList.size-1) {
 
         }
-        addAll(*arrayOfNulls<Any>(nameList.size))
+        addAll(*arrayOfNulls<Any>(plantList.size))
     }
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         var _view = view
@@ -89,7 +89,7 @@ class PlantToChooseAdapter(private val context: Context,
         } else {
             binding = ViewPlantToChooseBinding.bind(_view)
         }
-        this.storedPlantId = idList
+        this.storedPlants = plantList
         //showSpeciesImg = _view!!.findViewById<ImageButton>(R.id.show_species_choose_img)
         //Log.d("ChoosePlantAdapter","Position ${position}'s ImageButton: ${showSpeciesImg}")
         //showSpeciesImgArray.add(showSpeciesImg)
@@ -100,7 +100,7 @@ class PlantToChooseAdapter(private val context: Context,
         val deletePlantBtn = binding.deletePlantBtn
         Log.d("ChoosePlantAdapter","Position ${position}'s TextView: ${showPlantName}")
 
-        showPlantName.text = nameList[position]
+        showPlantName.text = plantList[position].name
 
         // setup to receive broadcast from MyDownloadService
         //initReceiver()
@@ -111,17 +111,22 @@ class PlantToChooseAdapter(private val context: Context,
         //}
 
         viewPlantBtn.setOnClickListener{
-            val thisId = this.storedPlantId[position]
+            val thisId = this.plantList[position].plantId
+            val userId = this.plantList[position].userId
             val intent = Intent(getContext(), ViewPlantDetailsActivity::class.java)
             intent.putExtra("plantId", thisId)
             getContext().startActivity(intent)
         }
 
         editPlantBtn.setOnClickListener{
-            val thisId = this.storedPlantId[position]
+            val thisId = this.plantList[position].plantId
+            val userId = this.plantList[position].userId
             val intent = Intent(getContext(), AddPlantActivity::class.java)
             intent.putExtra("update", true)
+            Log.d("PlantToChooseAdapter","putExtra update: true")
             intent.putExtra("plantId", thisId)
+            intent.putExtra("userId",userId)
+            Log.d("PlantToChooseAdapter","putExtra userId: ${userId}")
             getContext().startActivity(intent)
         }
 

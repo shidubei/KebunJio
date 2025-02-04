@@ -67,7 +67,7 @@ class AddPlantActivity : AppCompatActivity() {
 
     private var dummyData: DummyData = DummyData()
 
-    lateinit var harvestSpinnerOptions: MutableList<String>
+    private var harvestSpinnerOptions = mutableListOf("Harvested","Not Harvested")
 
     // services
     //variables for service, set bound to false
@@ -160,7 +160,6 @@ class AddPlantActivity : AppCompatActivity() {
         speciesSpinner.adapter = spinAdapter
 
         // set harvest spinner options
-        val harvestSpinnerOptions = mutableListOf("Harvested","Not Harvested")
         val harvestSpinAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this,
                                                                                 android.R.layout.simple_spinner_item,
                                                                                 harvestSpinnerOptions)
@@ -181,9 +180,7 @@ class AddPlantActivity : AppCompatActivity() {
             addNewPlant()
         }
 
-        // bind service
-        val intent = Intent(this@AddPlantActivity, MlModelService::class.java)
-        bindService(intent, conn, Context.BIND_AUTO_CREATE)
+        bindNeededService()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -193,16 +190,27 @@ class AddPlantActivity : AppCompatActivity() {
 
         // if updating
         updateUserId = intent.getIntExtra("userId",-1)
+        Log.d("AddPlantActivity","userId: ${updateUserId}")
         if (intent.getBooleanExtra("update",false)) {
-            binding.titlePart.text = "Edit Plant"
+            Log.d("AddPlantActivity","We are in update mode")
+            binding.titlePart.text = "Update Plant"
+            binding.addPlantBtn.text = "Update Plant"
             val plantId = intent.getIntExtra("plantId",-1)
+            Log.d("AddPlantActivity","plantId: ${plantId}")
             val chosenPlant = dummyData.PlantDummy[plantId]
             setData(chosenPlant)
         }
     }
 
+    public fun bindNeededService() {
+        // bind service
+        val intent = Intent(this@AddPlantActivity, MlModelService::class.java)
+        bindService(intent, conn, Context.BIND_AUTO_CREATE)
+    }
+
     public fun setData(plant: Plant) {
         updatePlantId = plant.plantId
+        Log.d("AddPlantActivity","set ediblePlantSpeciesId: ${plant.ediblePlantSpeciesId}")
         speciesSpinner.setSelection(plant.ediblePlantSpeciesId)
         updateUserId = plant.userId
         nameEditText.setText(plant.name)

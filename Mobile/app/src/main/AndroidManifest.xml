@@ -39,6 +39,9 @@
             android:name=".features.logactivities.LogActivitiesActivity"
             android:exported="false" />
         <activity
+            android:name=".features.logactivities.ChooseLogToViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.planthealthcheck.PlantHealthCheckActivity"
             android:exported="false" />
         <activity

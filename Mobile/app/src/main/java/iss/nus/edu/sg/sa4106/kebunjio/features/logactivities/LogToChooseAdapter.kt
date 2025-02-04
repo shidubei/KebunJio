@@ -59,6 +59,8 @@ class LogToChooseAdapter(private val context: Context,
             binding = ViewActLogToChooseBinding.bind(_view)
         }
         val positionId = userActLogList[position].logId
+        Log.d("LogToChooseAdapter","do for positionId: ${positionId}")
+        val userId = userActLogList[position].userId
         val activityType = userActLogList[position].activityType
         val timestamp = userActLogList[position].timestamp
         val plantId = userActLogList[position].plantId
@@ -97,9 +99,13 @@ class LogToChooseAdapter(private val context: Context,
 
         editLogBtn.setOnClickListener{
             val thisId = positionId
-            val intent = Intent(getContext(), AddPlantActivity::class.java)
+            val intent = Intent(getContext(), LogActivitiesActivity::class.java)
             intent.putExtra("update", true)
+            Log.d("LogToChooseAdapter","putExtra update: true")
             intent.putExtra("logId", thisId)
+            Log.d("LogToChooseAdapter","putExtra logId: ${thisId}")
+            intent.putExtra("userId",userId)
+            Log.d("LogToChooseAdapter","putExtra userId: ${userId}")
             getContext().startActivity(intent)
         }
 

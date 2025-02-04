@@ -38,7 +38,12 @@ object PlantApiService  {
                     plantId = plantJson.getInt("plantId"),
                     ediblePlantSpeciesId = plantJson.getInt("ediblePlantSpeciesId"),
                     userId = plantJson.getInt("userId"),
-                    name = plantJson.getString("name")
+                    name = plantJson.getString("name"),
+                    disease = plantJson.getString("disease"),
+                    plantedDate = plantJson.getString("plantedDate"),
+                    harvestStartDate = plantJson.getString("harvestStartDate"),
+                    plantHealth = plantJson.getString("plantHealth"),
+                    harvested = plantJson.getBoolean("harvested")
                 )
                 plantsList.add(plant)
             }
