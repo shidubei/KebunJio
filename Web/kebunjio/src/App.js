@@ -12,12 +12,13 @@ import ViewPost from './features/qna-forum/pages/forum-view-post'
 import LoginPage from './features/login-signup/login';
 import SignUpPage from './features/login-signup/signup';
 import ForumEditPost from './features/qna-forum/pages/forum-edit-post';
+import UserProfileEditPage from "./features/user-profile/user-profile-edit-page";
 
 function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/events" element={<EventPage />} />
@@ -29,6 +30,7 @@ function App() {
           <Route path="/forum/my" element={<ForumMyPage/>} /> 
           <Route path="/forum/post" element={<ViewPost/>} /> 
           <Route path="/user-profile" element={<UserProfilePage/>} />
+          <Route path="/user-profile/update" element={<UserProfileEditPage/>} />
           <Route path="/forum/:id/edit" element={<ForumEditPost />} />
         </Routes>
       </BrowserRouter>
