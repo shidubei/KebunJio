@@ -58,4 +58,4 @@ public class EventService {
     public void deleteEvent(Long id) {
     }
 }
->>>>>>> 12a9cfa7eb0d4c76198f9d264c0113bba40687e4
+
