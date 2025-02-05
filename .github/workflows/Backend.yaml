@@ -122,7 +122,7 @@ jobs:
       # Connect to Target Server
       - name: Connect Server
         run: |
-          ssh -i ~/.ssh/google_cloud_key shidubei@34.124.209.141 "echo 'SSH connection successful!'
+          ssh -i ~/.ssh/google_cloud_key shidubei@34.124.209.141 "echo 'SSH connection successful!'"
 
       - name: Pull Docker image
         run: |
