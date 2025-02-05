@@ -95,7 +95,7 @@ jobs:
 
       # Push image to Dockerhub
       - name: Push Docker image
-        if: ${{ github.event.inputs.build_docker == 'true' }}
+        # if: ${{ github.event.inputs.build_docker == 'true' }}
         working-directory: Backend/KebunJio
         run: |
           docker push ${{ secrets.DOCKERHUB_NAME }}/kebunjio:${{ github.sha }}
@@ -105,7 +105,7 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: build # After build stage finished
-    if: ${{ github.event.inputs.deploy == 'true' }}
+    # if: ${{ github.event.inputs.deploy == 'true' }}
 
     steps:
       # Checkout Project Code
