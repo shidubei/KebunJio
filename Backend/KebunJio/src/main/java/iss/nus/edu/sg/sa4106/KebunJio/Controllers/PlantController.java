@@ -35,11 +35,12 @@ public class PlantController {
 	public ResponseEntity<Plant> getPlant(@PathVariable String plantId) {
         try {
             Optional<Plant> existingPlant = plantService.getPlant(plantId);
-            if (existingPlant.isPresent()) {
-            	return ResponseEntity.ok(existingPlant.get());
-            } else {
-            	return ResponseEntity.notFound().build();
-            }
+            return ResponseEntity.ok(existingPlant.get());
+            //if (existingPlant.isPresent()) {
+            //	
+            //} else {
+            //	return ResponseEntity.notFound().build();
+            //}
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
@@ -49,11 +50,12 @@ public class PlantController {
 	public ResponseEntity<List<Plant>> getUserPlants(@PathVariable String userId) {
         try {
         	List<Plant> userPlants = plantService.getAllUserPlants(userId);
-            if (userPlants.size() > 0) {
-            	return ResponseEntity.ok(userPlants);
-            } else {
-            	return ResponseEntity.notFound().build();
-            }
+        	return ResponseEntity.ok(userPlants);
+            //if (userPlants.size() > 0) {
+            //	return ResponseEntity.ok(userPlants);
+            //} else {
+            //	return ResponseEntity.notFound().build();
+            //}
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }

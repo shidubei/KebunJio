@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 // changed to Rest API
 @RestController
+@RequestMapping("/Users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
