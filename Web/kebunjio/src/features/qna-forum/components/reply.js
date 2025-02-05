@@ -11,6 +11,8 @@ const Reply = ({userReply}) => {
     const [reply, setReply] = useState(userReply)
 
     const [isEditing, setIsEditing] = useState(false)
+
+    const [editedContent, setEditedContent] = useState(reply.content);
     
     const onClickEdit = () =>{
         setIsEditing(true)
@@ -18,10 +20,61 @@ const Reply = ({userReply}) => {
 
     const onClickDelete = () => {
         alert("Delete reply")
+        const requestData = {
+            Id: reply.id
+        }
+        console.log(JSON.stringify(requestData))
+        /*API Implementation
+            fetch('https://', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            })
+            .then(response => response.json())  // Parse the response to JSON
+            .then(data => {
+                console.log('Success:', data)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            })
+        
+        */
     }
 
-    const onSubmitEdit = (e) => {
-        setReply({ ...reply, content: e.target.value });
+    const onSubmitEdit = () => {
+        setReply({ ...reply, content: editedContent });
+        setIsEditing(false);
+
+        const requestData = {
+            Id: reply.id,
+            Content: reply.content,
+            PublishedDateTime: new Date(),
+          }
+          console.log(JSON.stringify(requestData))
+          alert("Updated reply!")
+          /*API Implementation
+          fetch('https://', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            })
+            .then(response => response.json())  // Parse the response to JSON
+            .then(data => {
+                console.log('Success:', data)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            })
+          
+          */
+    }
+
+    const onChangeEdit = (e) => {
+        setEditedContent(e.target.value)
     }
 
     return(
@@ -33,7 +86,8 @@ const Reply = ({userReply}) => {
                         <Form>
                             <Form.Control
                                 as="textarea"
-                                value={reply.content}/>
+                                value={editedContent}
+                                onChange={onChangeEdit}/>
                             <Button onClick={onSubmitEdit}>Edit</Button>
                         </Form>
                     ):

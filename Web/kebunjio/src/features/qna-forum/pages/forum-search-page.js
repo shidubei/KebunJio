@@ -10,10 +10,11 @@ import { useNavigate } from "react-router-dom";
 function ForumSearchPage() {
   let navigate = useNavigate();
  
-  const routeChange = (postId) =>{ 
-     navigate(`/forum/post/?id=${postId}`);
+  const routeChange = (post) =>{ 
+     navigate(`/forum/post/?id=${post.Id}`, {state: {post : post}});
    }
 
+  const [posts, setPosts] = useState([])
   const [search_results, setSearchResults] = useState([])
 
     useEffect(() => {
@@ -43,36 +44,29 @@ function ForumSearchPage() {
           // Merge data
           const mergedPosts = posts.map(post => ({
               ...post,
-              username: users.find(user => user.id === post.usernameId)?.username || "Unknown",
-              upvote: upvoteCount[post.id] || 0,
-              comment: commentCount[post.id] || 0
+              username: users.find(user => user.id === post.UserId)?.username || "Unknown",
+              upvote: upvoteCount[post.Id] || 0,
+              comment: commentCount[post.Id] || 0
           }));
   
-          // Sort by upvotes first, then by replies if upvotes are equal
-          const sortedPosts = mergedPosts.sort((a, b) => {
-              if (b.upvote === a.upvote) {
-                  return b.reply - a.reply; // Sort by replies if upvotes are the same
-              }
-              return b.upvote - a.upvote; // Sort by upvotes first
-          });
-  
-          console.log(sortedPosts)
-  
-          setSearchResults(sortedPosts);
+          console.log(mergedPosts)
+          setPosts(mergedPosts)
+          setSearchResults(mergedPosts)
       }
   
       fetchData();
   }, []);
 
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState('')
 
   const handleSearchInputChange = (event) => {
       setSearchInput(event.target.value);
   };
 
-  /*TODO: implement with call to API*/
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = () => {
     console.log(searchInput)
+    const filteredPosts = posts.filter(post => post.Title.includes(searchInput.toLowerCase()))
+    setSearchResults(filteredPosts)
 
     /*For call to API function */
     /* const strLength = getLength(searchInput)
@@ -120,7 +114,7 @@ function ForumSearchPage() {
           <div>
             <p style={{marginTop:"10px", marginLeft:"8px"}} className="page-header">Search result:</p>
             {search_results.length!==0?(search_results.map((post,index)=>(
-                <PostSneakPeak key={index} post={post} onClick={() => routeChange(post.id)}/>
+                <PostSneakPeak key={index} post={post} onClick={() => routeChange(post)}/>
             ))):(<p style={{marginTop:"10px", marginLeft:"8px"}}>No result</p>)}
           </div>
         </div>

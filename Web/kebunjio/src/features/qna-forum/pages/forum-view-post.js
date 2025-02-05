@@ -33,7 +33,7 @@ const Post = () => {
 
 
                 //filtered comment
-                const filteredComments = commentsData.filter((comment) => comment.postId === fetchedPost.id) || [];
+                const filteredComments = commentsData.filter((comment) => comment.postId === fetchedPost.Id) || [];
 
                 // Count likes per reply
                 const likeCount = replyLikes.reduce((like, { replyId }) => {
@@ -63,9 +63,10 @@ const Post = () => {
         fetchData();
     }, []);
 
+    /* Check if post is received
     useEffect(() => {
         console.log("Fetched Post: ", post);
-    }, [post]);
+    }, [post]);*/
 
     const [replyInput, setReplyInput] = useState("");
 
@@ -74,12 +75,36 @@ const Post = () => {
     };
 
     const handleSubmitReply = () => {
-        alert(replyInput);
-        // Implement API call here
+        const requestData = {
+            reply: replyInput
+        }
+        console.log(JSON.stringify(requestData))
+        setReplyInput("")
+        alert("Reply sent!")
+
+        //
+        /**
+         * 
+        API implementation
+        fetch('https://', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then(response => response.json())  // Parse the response to JSON
+        .then(data => {
+            console.log('Success:', data)
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        })
+        */
     };
 
     const handleClear = () => {
-        setReplyInput("");
+        setReplyInput("")
     };
 
     return (

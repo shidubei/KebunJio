@@ -6,22 +6,6 @@ import '../styling/forum-page.css'
 import { useNavigate } from "react-router-dom";
 
 function ForumTopPage() {
-  /*TODO: implement call to API using the below useEffect */
-  /* const [posts, setPosts] = useState([]) 
-    useEffect(() => {
-        const fetchTopTenPost = async () => {
-            try{
-              const response = await fetch(api);
-              const data = await response.json();
-              setPosts(data.posts)
-            } catch (error) {
-              console.error("Error fetching top post", error)
-            }
-          }
-      })
-
-  */
-
   const [posts, setPosts] = useState([])
   
   useEffect(() => {
@@ -29,7 +13,7 @@ function ForumTopPage() {
         const postsRes = await fetch("/dummy-data/post.json");
         const upvotesRes = await fetch("/dummy-data/upvote.json");
         const usersRes = await fetch("/dummy-data/user.json");
-        const commentRes = await fetch("./dummy-data/reply.json");
+        const commentRes = await fetch("/dummy-data/reply.json");
 
         const posts = await postsRes.json()
         const upvotes = await upvotesRes.json()
@@ -51,9 +35,9 @@ function ForumTopPage() {
         // Merge data
         const mergedPosts = posts.map(post => ({
             ...post,
-            username: users.find(user => user.id === post.usernameId)?.username || "Unknown",
-            upvote: upvoteCount[post.id] || 0,
-            comment: commentCount[post.id] || 0
+            username: users.find(user => user.id === post.UserId)?.username || "Unknown",
+            upvote: upvoteCount[post.Id] || 0,
+            comment: commentCount[post.Id] || 0
         }))
 
         // Sort by upvotes first, then by replies if upvotes are equal

@@ -28,14 +28,14 @@ const ReplyHeader = ({username, time, onEdit, onDelete}) =>{
                 </Col>
                 <Col xs="auto">
                 {
-                    username==="Kelly"?(<Dropdown>
+                    <Dropdown>
                         <Dropdown.Toggle className="three-dot">
                         </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={onEdit}>Edit Reply</Dropdown.Item>
-                                <Dropdown.Item onClick={onDelete}>Delete Reply</Dropdown.Item>
+                                <Dropdown.Item onClick={onEdit}>Edit reply</Dropdown.Item>
+                                <Dropdown.Item onClick={onDelete}>Delete reply</Dropdown.Item>
                             </Dropdown.Menu>
-                        </Dropdown>):(<div></div>)
+                        </Dropdown>
                 }
                 </Col>
             </Row>
