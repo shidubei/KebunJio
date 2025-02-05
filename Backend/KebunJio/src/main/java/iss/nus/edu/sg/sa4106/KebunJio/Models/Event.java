@@ -7,12 +7,12 @@ import java.time.ZoneId;
 import java.util.Objects;
 import java.util.Date;
 
-@Document(collection = "events")
+@Document(collection = "Event")
 public class Event {
 
 	@Id
 	private String id;
-	private int eventId;
+	private int eventId; // when I try to remove it the maven app cannot run
 	private String name;
 	private String location;
 	private LocalDateTime startDateTime;

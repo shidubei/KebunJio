@@ -2,6 +2,9 @@ package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Reminders")
 public class Reminder {
     private int reminderId;
     private User user;
