@@ -19,12 +19,12 @@ on:
       deploy:
         description: 'Deploy to production'
         required: true
-        default: 'false' # Default not deploy, wait user check
+        default: 'true' # Default not deploy, wait user check
         type: boolean
       build_docker:
         description: 'Build Docker Image'
         required: true
-        default: 'false'
+        default: 'true'
         type: boolean
   
 
