@@ -2,22 +2,29 @@ package iss.nus.edu.sg.sa4106.KebunJio.Models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ActivityLog {
-    private int logId;
+	
+	@Id
+    private String id;
     private User user;
     private Plant plant;
     private String activityType;
     private String activityDescription;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
     
 	public ActivityLog() {}
 
-	public int getLogId() {
-		return logId;
+	public String getId() {
+		return id;
 	}
 
-	public void setLogId(Integer logId) {
-		this.logId = logId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public User getUser() {
