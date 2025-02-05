@@ -55,6 +55,7 @@ const EventList = () => {
     }
 
     return (
+        
         <div className="container mx-auto px-4 py-8">
             {/* Header section with filters */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
