@@ -1,0 +1,56 @@
+name: Try CI/CD  pipeline for Frontend
+
+# Set the trigger conditions
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - 'Web/**'
+    paths_ignore:
+      # wait
+    pull_request:
+      branches:
+        - staging
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to production'
+        required: true
+        default: 'false'
+        type: boolean
+
+# Set the CI/CD pipeline
+jobs:
+  # Build
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          # origin?
+      
+      - name: Install dependencies
+        working-directory: Web/kebunjio
+        run: npm ci
+
+      - name: Build React Frontend
+        working-directory: Web/kebunjio
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: Web/kebunjio/build
+
+
+
+      
