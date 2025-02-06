@@ -37,9 +37,11 @@ jobs:
       run: chmod +x Mobile/gradlew
 
     - name: Build wirh Gradle
-      run: Mobile/gradlew build
+      working-directory: Mobile
+      run: ./gradlew build
 
     - name: Generate APK
+      working-directory: Mobile
       run: Mobile/gradlew assembleDebug
 
     - name: Upload APK artifact
