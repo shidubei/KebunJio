@@ -126,7 +126,7 @@ public class PostService {
 	}
 	
 	//Function for Junit and GithubActions
-	public int add(int a,int d) {
-		return a+d;
+	public int add(int a,int b) {
+		return a+b;
 	}
 }
