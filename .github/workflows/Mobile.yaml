@@ -25,16 +25,14 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '17'
-        distribution: 'temurin'
+        distribution: 'temurin' 
 
     - name: Setup Android SDK
-      uses: android-github-actions/setup-android@v3
+      uses: android-actions/setup-android@v3
       with:
-        api-level: 34
         build-tools-version: '34.0.0'
-        ndk-version: 26.2.11394342
-        cmake-version: 3.22.1
-    
+        platform-version: '34'
+        
     - name: Grant execute permissions for gradlew
       run: chmod +x gradlew
 
